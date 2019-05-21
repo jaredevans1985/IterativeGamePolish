@@ -12,11 +12,4 @@ var playerSettings = {
     bulletSize: 2,              // How big is the bullet image - the bigger this is, the larger the bullet will be
     fireRate: 2,                // How long in seconds between shots
     bulletCollisionRadius: 5,   // How easy it is to collide with a bullet, turn DEBUG_MODE_ON to true in gamesettings to see this as a black circle
-	
-	// Audio settings
-	SFX: {
-		shoot: 'click',
-	},
-	
-	// Particle settings
 }

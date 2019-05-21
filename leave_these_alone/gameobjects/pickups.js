@@ -87,6 +87,12 @@ class Pickup {
             this.debugShape.graphics.beginStroke("black").drawCircle(0,0, this._radius);
             this._container.addChild(this.debugShape);
         }
+		
+		// Play spawn sound if one exists
+		if(polishSettings.pickupSounds[name] && polishSettings.pickupSounds[name].spawn)
+		{
+			audio.playSound(polishSettings.pickupSounds[name].spawn);
+		}
     }
 
     get container() { return this._container; }
@@ -175,6 +181,24 @@ class Pickup {
     {
         app.gamespace.removeChild(this._container);
         app.pickups.splice(app.pickups.indexOf(this), 1);
+		
+		
+		if(this.timeLeft <= 0)
+		{
+			// Play timeout sound if one exists
+			if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].timeout)
+			{
+				audio.playSound(polishSettings.pickupSounds[this.name].timeout);
+			}
+		}
+		else
+		{
+			// Play pickup sound if one exists
+			if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].pickup)
+			{
+				audio.playSound(polishSettings.pickupSounds[this.name].pickup);
+			}	
+		}
     }
 
     onCollision()

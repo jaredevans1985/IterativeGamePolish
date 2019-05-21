@@ -35,6 +35,7 @@ var app = {
     state: "menus",
     waveStartTimer: gameSettings.waveStartDelay,
     postWaveTimer: gameSettings.waveIsOverDelay,
+	deathTimer: gameSettings.playerIsDyingTimer,
 
     // Asset management
     bullets: [],
@@ -148,72 +149,79 @@ var app = {
         // Update specific to actually being in game
         else if (app.state == "wavestart" || app.state == "inwave" || app.state == "postwave")
         {
-             // Update all of our bullets
-            for (var i = 0; i < app.bullets.length; i++)
-            {
-                app.bullets[i].update(dt);
-            }
+			// If we're dead, don't update everything
+			if( app.player.health > 0)
+			{
+				 // Update all of our bullets
+				for (var i = 0; i < app.bullets.length; i++)
+				{
+					app.bullets[i].update(dt);
+				}
 
-            for (var i = 0; i < app.enemyBullets.length; i++)
-            {
-                app.enemyBullets[i].update(dt);
-            }
+				for (var i = 0; i < app.enemyBullets.length; i++)
+				{
+					app.enemyBullets[i].update(dt);
+				}
 
-            // Update all of our enemies
-            for (var i = 0; i < app.enemies.length; i++)
-            {
-                app.enemies[i].update(dt);
-            }
+				// Update all of our enemies
+				for (var i = 0; i < app.enemies.length; i++)
+				{
+					app.enemies[i].update(dt);
+				}
 
-            // Update all of our pickups
-            for (var i = 0; i < app.pickups.length; i++)
-            {
-                app.pickups[i].update(dt);
-            }
+				// Update all of our pickups
+				for (var i = 0; i < app.pickups.length; i++)
+				{
+					app.pickups[i].update(dt);
+				}
 
-            // Update the player
-            app.player.update(dt);
+				// Update the player
+				app.player.update(dt);
 
+				// Update our fire rate
+				if(app.fireRateTimer >= 0)
+				{
+					app.fireRateTimer -= dt;
+				}
+
+				var moveSpeed = 50;
+				if(app.player.moveSpeed)
+				{
+					moveSpeed = app.player.moveSpeed;
+				}
+				else
+				{
+					console.log("ERROR: playerSettings.moveSpeed is not defined");
+				}
+
+
+				// Poll the keys and move the player character accordinlgy
+				if(app.KEYCODE_LEFT.isPressed || app.KEYCODE_A.isPressed)
+				{
+					app.player.addPosition(-moveSpeed * dt, 0);
+				}
+
+				if(app.KEYCODE_RIGHT.isPressed || app.KEYCODE_D.isPressed)
+				{
+					app.player.addPosition(moveSpeed * dt, 0);
+				}
+
+				if(app.KEYCODE_UP.isPressed || app.KEYCODE_W.isPressed)
+				{
+					app.player.addPosition(0, -moveSpeed * dt);
+				}
+
+				if(app.KEYCODE_DOWN.isPressed || app.KEYCODE_S.isPressed)
+				{
+					app.player.addPosition(0, moveSpeed * dt);
+				}
+
+				
+			}
+			
+            
             // Update the game timer
             app.gameTime += dt;
-
-            // Update our fire rate
-            if(app.fireRateTimer >= 0)
-            {
-                app.fireRateTimer -= dt;
-            }
-
-            var moveSpeed = 50;
-            if(app.player.moveSpeed)
-            {
-                moveSpeed = app.player.moveSpeed;
-            }
-            else
-            {
-                console.log("ERROR: playerSettings.moveSpeed is not defined");
-            }
-
-
-            // Poll the keys and move the player character accordinlgy
-            if(app.KEYCODE_LEFT.isPressed || app.KEYCODE_A.isPressed)
-            {
-                app.player.addPosition(-moveSpeed * dt, 0);
-            }
-
-            if(app.KEYCODE_RIGHT.isPressed || app.KEYCODE_D.isPressed)
-            {
-                app.player.addPosition(moveSpeed * dt, 0);
-            }
-
-            if(app.KEYCODE_UP.isPressed || app.KEYCODE_W.isPressed)
-            {
-                app.player.addPosition(0, -moveSpeed * dt);
-            }
-
-            if(app.KEYCODE_DOWN.isPressed || app.KEYCODE_S.isPressed)
-            {
-                app.player.addPosition(0, moveSpeed * dt);
-            }
 
             // We need the angle in both radians and degrees
             var angleRad = Math.atan2(app.mousePos.y - app.player.position.y, app.mousePos.x - app.player.position.x);
@@ -314,7 +322,7 @@ var app = {
                         {
                             
                             // If the game is over, end it now
-                            if(app.currentWave > gameSettings.waveDefs.length)
+                            if(app.currentWave > gameSettings.waveDefs.length || app.player.health <= 0)
                             {
                                 app.gotoScreen("gameover");
                             }
@@ -331,6 +339,7 @@ var app = {
                     console.log("ERROR: gameSettings.waveIsOverDelay is not defined");
                 }
             }
+
 
         }
         
@@ -455,7 +464,7 @@ var app = {
     handleMouseDown: function(evt)
     {
 
-        if(this.state == "inwave" || this.state == "wavestart" || this.state == "postwave")
+        if((this.state == "inwave" || this.state == "wavestart" || this.state == "postwave") && app.player.health > 0)
         {
             // fire a bullet
             if(this.fireRateTimer <= 0)
@@ -476,7 +485,7 @@ var app = {
                 }
                 
 				// Make a noise
-				audio.playSound(playerSettings.SFX.shoot);
+				audio.playSound(polishSettings.playerSounds.shoot);
             }
         }
         

@@ -134,6 +134,12 @@ class Enemy {
             this.debugShape.graphics.beginStroke("black").drawCircle(0,0, this._radius);
             this._container.addChild(this.debugShape);
         }
+		
+		// Play spawn sound if one exists
+		if(polishSettings.enemySounds[name] && polishSettings.enemySounds[name].spawn)
+		{
+			audio.playSound(polishSettings.enemySounds[name].spawn);
+		}
     }
 
     get container() { return this._container; }
@@ -238,6 +244,12 @@ class Enemy {
                     this.shootTimer = this.info.bulletSettings.fireRate;
 
                     app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings));
+					
+					// Play shoot sound if one exists
+					if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].shoot)
+					{
+						audio.playSound(polishSettings.enemySounds[this.name].shoot);
+					}
                 }
             }
         }
@@ -252,6 +264,12 @@ class Enemy {
     {
         app.gamespace.removeChild(this._container);
         app.enemies.splice(app.enemies.indexOf(this), 1);
+		
+		// Play die sound if one exists
+		if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].die)
+		{
+			audio.playSound(polishSettings.enemySounds[this.name].die);
+		}
     }
 
     onCollision(collidingObject)
@@ -329,6 +347,14 @@ class Enemy {
                 }
             }
         }
+		else
+		{
+			// If we didn't die play a sound
+			if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].hurt)
+			{
+				audio.playSound(polishSettings.enemySounds[this.name].hurt);
+			}
+		}
     }
 
 }

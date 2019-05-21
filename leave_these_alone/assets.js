@@ -61,7 +61,6 @@ var assets = {
 
 		// Add user defined assets to the manifest
 		manifest = manifest.concat(mediaManifest);
-		console.log(manifest);
 
         // Set the root filepath for our assets
         this.queue = new createjs.LoadQueue(true);
@@ -86,7 +85,7 @@ var assets = {
         app.gotoScreen("menus");
 
         // Start the music
-        audio.toggleMusic(true);
+        //audio.toggleMusic(true);
     },
 
     // When an individual file is loaded, call this function

@@ -6,7 +6,7 @@ var gameSettings = {
     waveStartDelay: 3,  // Before a wave starts, how much time is there for the intro?
     waveIsOverDelay: 3, // After a wave ends, how much time is there before we go to the next wave intro?
 
-    victoryMessage: "ALL WAVES COMPLETED",  // The final text that appears
+    victoryMessage: "ALL WAVES COMPLETED",  // The final text that appears on victory
 
     //define what happens in each wave, and how many waves there are total
     waveDefs: [

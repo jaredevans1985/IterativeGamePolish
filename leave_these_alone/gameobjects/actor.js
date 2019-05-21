@@ -160,6 +160,9 @@ class Actor {
             {
                 player.onCollision(bullet);
                 bullet.onCollision(player);
+				
+				// Make a noise
+				audio.playSound(polishSettings.playerSounds.hurt);
             }
         });
     }
@@ -173,16 +176,23 @@ class Actor {
     {
         this.health -= collidingObject.info.damage ? collidingObject.info.damage : 0;
         
-        if(!collidingObject.info.damage && !(collidingObject instanceof Pickup))
+		if(!collidingObject.info.damage && !(collidingObject instanceof Pickup))
         {
             console.log("WARNING: Player collided with '" + collidingObject.name + "' which does not have a damage value defined ");
         }
-
+		
         app.screen.healthFill.updateFillbar();
 
         if (this.health <= 0)
         {
-            app.gotoScreen("gameover");
+            app.state = "postwave";
+			app.postWaveTimer = gameSettings.waveIsOverDelay;
+			app.screen.waveText.text = polishSettings.lossMessage;
+			// make player invisible
+			this.container.visible = false;
+			// play a sound
+			audio.playSound(polishSettings.playerSounds.die);
+			// do a particle
         }
     }
 
