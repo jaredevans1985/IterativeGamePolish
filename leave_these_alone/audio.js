@@ -7,6 +7,9 @@ var audio = {
     // Booleans to track the state of our sound effects and musics
     sfxCanPlay : true,
     musicPlaying : true,
+	
+	// What is the current music track
+	musicID: "music",
 
     // Play the sound with the given id
     playSound : function(id)
@@ -32,13 +35,39 @@ var audio = {
         // TODO: Turn off any sounds that are currently playing
     },
 
+	// Start Wave Music
+	startWaveMusic : function(waveNum)
+	{
+		// Stop music if currently playing
+		if(this.musicID != "")
+		{
+			createjs.Sound.stop(this.musicID);
+		}
+		
+		// Find and set new music id
+		for(var i = 0; i < polishSettings.waveMusic.length; i++)
+		{
+			if(polishSettings.waveMusic[i].waveNumber == waveNum)
+			{
+				this.musicID = polishSettings.waveMusic[i].musicID;
+			}
+		}
+		
+		// Start new music
+		if(this.musicID != "")
+		{
+			createjs.Sound.play(this.musicID, {loop:-1});
+			this.musicPlaying = true;
+		}
+	},
+
     // Toggle the music on and off
     toggleMusic : function(forceStart = false)
     {
         // If toggleOn is true, force the music to start
         if(forceStart && this.sfxCanPlay)
         {
-            createjs.Sound.play("music", {loop:-1});
+            createjs.Sound.play(musicID, {loop:-1});
             this.musicPlaying = true;
         }
         // Otherwise swap the state
@@ -46,13 +75,13 @@ var audio = {
         {
             if(this.musicPlaying && this.sfxCanPlay)
             {
-                createjs.Sound.stop("music");
+                createjs.Sound.stop(musicID);
                 this.musicPlaying = false;
                 //console.log("stopped music");
             }
             else
             {
-                createjs.Sound.play("music", {loop:-1});
+                createjs.Sound.play(musicID, {loop:-1});
                 this.musicPlaying = true;
                 //console.log("started music");
             }

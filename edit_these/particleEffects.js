@@ -16,56 +16,8 @@
 //		For example, effects.basicBurst({ x: 100, y: 100}); would make a burst effect at 100, 100
 
 // This effects object contains functions to build all of our effects as needed
-var effects = {
-	// Try to execute a particle effect
-	tryParticle: function(effectInfo, effectName, position)
-	{
-		
-		// Test to see if the effect is defined
-		if(effectInfo[effectName])
-		{
-			// Does the particle method exist
-			if(particleEffects[effectInfo[effectName].particleID])
-			{
-				// Is there an image id or not
-				if(effectInfo[effectName].imageID)
-				{
-					return particleEffects[effectInfo[effectName].particleID](position, effectInfo[effectName].imageID);
-				}
-				else
-				{
-					return particleEffects[effectInfo[effectName].particleID](position);
-				}
-			}
-			else
-			{
-				console.log("Warning: Cannot find function for particle effect " + effectInfo[effectName] + "." + particleID);
-			}
-		}
-		
-		return null;
-	},
-	
-	// Add a new emitter to the particle system and return the new object
-	// This is used by the example functions below when they're creating new particle systems
-	getNewEmitter: function()
-	{
-		var newEmitter = new Emitter();
-		newEmitter.parent = app.stage;	// Setting a default parent
-		newEmitter.emitterArray = app.particleEmitters;	// What array will hold a reference to this emitter
-		newEmitter.assetList = assets;	// What object holds the loaded results from PreloadJS
-		app.particleEmitters.push( newEmitter );
-		return newEmitter;
-	},
+var particleEffects = {
 
-	// Clear all particles from the particle system
-	// Useful when you are changing screens or modes and need to get rid of all particles
-	clearAllParticles: function()
-	{
-		app.particleEmitters.forEach(emitter => {
-			emitter.kill();
-		});
-	},
 
 	/* Example emitter creator functions
 	// --------------
@@ -134,10 +86,10 @@ var effects = {
 	*/
 
 	// This is a basic emitter that constantly creates particles at a given rate
-	basicStream: function(position)
+	"basicStream": function(position)
 	{
 		// Get a new emitter
-		var newEmitter = this.getNewEmitter();
+		var newEmitter = effects.getNewEmitter();
 
 		// Define the settings for this emitter
 		newEmitter.lifetime = { min: 1, max: 2 };
@@ -166,7 +118,7 @@ var effects = {
 	"basicBurst" : function(position)
 	{
 		// Find where our new emitter should go and create it
-		var newEmitter = this.getNewEmitter();
+		var newEmitter = effects.getNewEmitter();
 
 		// Define the settings for this emitter
 		// Because we define a burstCount for this emitter, it will function as a burst
@@ -199,18 +151,17 @@ var effects = {
 	},
 
 	// A basic image particle stream that uses a preloaded bitmap image instead of a shape
-	basicImageStream: function(position, type, imageID, animID = "none")
+	"basicImageStream": function(position, imageID)
 	{
 		// Get a new emitter
-		var newEmitter = this.getNewEmitter();
+		var newEmitter = effects.getNewEmitter();
 
 		// Define the settings for this emitter
 		// This particle uses an image
-		// The type must be set to either "bitmap" or "sprite"
-		// You must then provide a valid asset ID
-		newEmitter.type = type;
+		// You must provide a valid asset ID
+		newEmitter.type = "bitmap";
 		newEmitter.imageID = imageID;
-		newEmitter.animID = animID;
+		newEmitter.animID = "none";
 		newEmitter.lifetime = { min: 2, max: 3 };
         newEmitter.position = position;
         newEmitter.positionOffsetX = { min: -3, max: 3 };
@@ -236,37 +187,38 @@ var effects = {
 		
 		return newEmitter;
 	},
-
-	// An image particle stream that follows stays relative to an objects rotation and position
-	basicRelativeImageStream: function(relativeObject, type, imageID, animID = "none")
+	
+	// A basic image burst that creates a given number of particles all at once and dies when those particles do
+	"basicImageBurst" : function(position, imageID)
 	{
-		// Get a new emitter
-		var newEmitter = this.getNewEmitter();
+		// Find where our new emitter should go and create it
+		var newEmitter = effects.getNewEmitter();
 
 		// Define the settings for this emitter
-		// This particle uses an image
-		// The type must be set to either "bitmap" or "sprite"
-		// You must then provide a valid asset ID
-		newEmitter.type = type;
+		// Because we define a burstCount for this emitter, it will function as a burst
+		// The emitter will automatically kill itself after its particles are dead
+		
+		newEmitter.type = "bitmap";
 		newEmitter.imageID = imageID;
-		newEmitter.animID = animID;
-		newEmitter.relativeTo = relativeObject;
+		newEmitter.animID = "none";	
+		newEmitter.burstCount = 15;
 		newEmitter.lifetime = { min: 1, max: 2 };
-        newEmitter.positionOffsetX = { min: -55, max: -50 };
-        newEmitter.velocityX = { min: -100, max: -75 };
-        newEmitter.radius = { min: 30, max: 45 };
-		newEmitter.rate = 5;
+        newEmitter.position = position;
+        newEmitter.positionOffsetX = { min: -3, max: 3 };
+        newEmitter.positionOffsetY = { min: -3, max: 3 };
+        newEmitter.velocityY = { min: -100, max: 100 };
+        newEmitter.velocityX = { min: -100, max: 100 };
+		newEmitter.size = { min: 10, max: 15 };
+		newEmitter.emitterRotation = 45;
 		newEmitter.rotation = { min: 0, max: 360 };
 		newEmitter.rotationRate = { min: 90, max: 180 };
-		newEmitter.startScale = 0.75;
-		newEmitter.endScale = 0;
-		
-		// Note: even though we don't need a color, the alpha value is used to fade the image
-		newEmitter.startColor = {
-            min: new RGBA(255,255,255,0.5),
-            max: new RGBA(255,255,255,0.5)
-		};
-		
+		newEmitter.endScale = 0.75;
+
+        newEmitter.startColor = {
+            min: new RGBA(0,50,230,255),
+            max: new RGBA(0,230,255,255)
+        };
+        
         newEmitter.endColor = {
             min: new RGBA(255,255,255,0),
             max: new RGBA(255,255,255,0)
@@ -274,5 +226,7 @@ var effects = {
 		
 		return newEmitter;
 	},
+	
+
 
 };

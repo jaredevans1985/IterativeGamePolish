@@ -9,4 +9,8 @@ var mediaManifest = [
 		src: "edit_these/media/audio/music.mp3",
 		id: "music"
 	},
+	{
+        src: "edit_these/media/images/particle.png",
+		id: "particle"
+	},
 ]

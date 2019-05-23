@@ -4,31 +4,6 @@ class Enemy {
         // Save our info
         this.info = info;
 
-        // create and parent the image
-        this._container = new createjs.Container();
-        this._image = new createjs.Shape();
-        this._image.graphics.beginFill(info.color ? info.color : "magenta").dp(0, 0, this.info.enemySize ? this.info.enemySize : 20, this.info.numberOfSides ? this.info.numberOfSides : 6);
-        parent.addChild(this._container);
-        this._container.addChild(this._image);
-
-        if(!this.info.enemySize)
-        {
-            console.log("ERROR: enemySize is not defined for " + info.name);
-        }
-
-        if(!this.info.color)
-        {
-            console.log("WARNING: Enemy '" + name + "' does not have a color defined, using default ");
-        }
-
-        if(!this.info.numberOfSides)
-        {
-            console.log("WARNING: Enemy '" + name + "' does not have a numberOfSides defined, using default ");
-        }
-
-        // Set the name
-        this._name = name;
-
         // Set the position and rotation
         var x = -50;
         var y = -50;
@@ -67,6 +42,39 @@ class Enemy {
 
         this._position = {x: x, y: y};
         this._rotation = 0;
+		
+		// Set the name
+        this._name = name;
+		
+		// Try to create trail particles
+		if(this.enemyHasParticles())
+		{
+			this._trail = effects.tryParticle(polishSettings.enemyParticles[this._name], "trailParticle", this._position);
+		}
+
+        // create and parent the image
+        this._container = new createjs.Container();
+        this._image = new createjs.Shape();
+        this._image.graphics.beginFill(info.color ? info.color : "magenta").dp(0, 0, this.info.enemySize ? this.info.enemySize : 20, this.info.numberOfSides ? this.info.numberOfSides : 6);
+        parent.addChild(this._container);
+        this._container.addChild(this._image);
+
+        if(!this.info.enemySize)
+        {
+            console.log("ERROR: enemySize is not defined for " + info.name);
+        }
+
+        if(!this.info.color)
+        {
+            console.log("WARNING: Enemy '" + name + "' does not have a color defined, using default ");
+        }
+
+        if(!this.info.numberOfSides)
+        {
+            console.log("WARNING: Enemy '" + name + "' does not have a numberOfSides defined, using default ");
+        }
+
+        
 
         // Set the attributes of the container
         this._container.x = this._position.x;
@@ -250,6 +258,12 @@ class Enemy {
 					{
 						audio.playSound(polishSettings.enemySounds[this.name].shoot);
 					}
+					
+					// And try a particle
+					if(this.enemyHasParticles())
+					{
+						effects.tryParticle(polishSettings.enemyParticles[this._name], "shootParticle", this._position);
+					}
                 }
             }
         }
@@ -264,12 +278,6 @@ class Enemy {
     {
         app.gamespace.removeChild(this._container);
         app.enemies.splice(app.enemies.indexOf(this), 1);
-		
-		// Play die sound if one exists
-		if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].die)
-		{
-			audio.playSound(polishSettings.enemySounds[this.name].die);
-		}
     }
 
     onCollision(collidingObject)
@@ -281,6 +289,25 @@ class Enemy {
         if(this.health <= 0)
         {
             this.killEnemy();
+
+			// Play die sound if one exists
+			if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].die)
+			{
+				audio.playSound(polishSettings.enemySounds[this.name].die);
+			}
+
+			// Remove trail if one exists
+			if(this._trail)
+			{
+				this._trail.kill();
+				this._trail = null;
+			}
+			
+			// Create death particle
+			if(this.enemyHasParticles())
+			{
+				effects.tryParticle(polishSettings.enemyParticles[this._name], "deathParticle", this._position);
+			}
 
             app.enemiesKilledThisWave++;
             app.enemiesKilledThisGame++;
@@ -354,7 +381,18 @@ class Enemy {
 			{
 				audio.playSound(polishSettings.enemySounds[this.name].hurt);
 			}
+			
+			// And try a particle
+			if(this.enemyHasParticles())
+			{
+				effects.tryParticle(polishSettings.enemyParticles[this._name], "hurtParticle", this._position);
+			}
 		}
     }
+	
+	enemyHasParticles()
+	{
+		return this._name !== null;
+	}
 
 }

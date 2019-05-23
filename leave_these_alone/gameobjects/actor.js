@@ -1,6 +1,13 @@
 class Actor {
     constructor(parent, name = "actor", x = 0, y = 0, scale = 1, rotation = 0)
     {
+		// Set the position and rotation
+        this._position = {x: x, y: y};
+        this._rotation = rotation;
+		
+		// Create the player trail
+		effects.tryParticle(polishSettings, "playerTrailParticle", this._position);
+		
         // create and parent the image
         this._container = new createjs.Container();
         this._image = new createjs.Shape();
@@ -15,10 +22,6 @@ class Actor {
 
         // Set the name
         this._name = name;
-
-        // Set the position and rotation
-        this._position = {x: x, y: y};
-        this._rotation = rotation;
 
         // Set the attributes of the container
         this._container.x = this._position.x;
@@ -160,9 +163,6 @@ class Actor {
             {
                 player.onCollision(bullet);
                 bullet.onCollision(player);
-				
-				// Make a noise
-				audio.playSound(polishSettings.playerSounds.hurt);
             }
         });
     }
@@ -193,7 +193,17 @@ class Actor {
 			// play a sound
 			audio.playSound(polishSettings.playerSounds.die);
 			// do a particle
+			effects.clearAllParticles();
+			effects.tryParticle(polishSettings, "playerDeathParticle", this._position);
         }
+		else
+		{
+			// Make a noise
+			audio.playSound(polishSettings.playerSounds.hurt);
+			
+			//do a particle
+			effects.tryParticle(polishSettings, "playerHurtParticle", this._position);
+		}
     }
 
 }

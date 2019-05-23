@@ -42,7 +42,37 @@ var polishSettings = {
 			pickup: "click",
 			timeout: "click",
 		},
-	}
+	},
 	
-	// Particle settings
+	waveMusic: [
+		{
+			waveNumber: 1,
+			musicID: "music",
+		},
+	],
+	
+	// Player Particle settings
+	// If you don't want one of these enabled, comment out the line
+	// imageID is only required for image particle effects
+	// if no imageID is specified, you won't get an error, but if you're using an effect that requires an image, you won't see anything
+	playerShootParticle: { particleID: "basicBurst" },	// Effect when player fires
+	playerTrailParticle: { particleID: "basicImageStream", imageID: "particle"},	// A trail of particles that follows the player (use a stream)
+	playerDeathParticle: { particleID: "basicImageBurst", imageID: "particle" }, // particle effect for when the player dies
+	playerHurtParticle: {particleID: "basicBurst"},	// effect when player is hit by something
+	
+	// Enemy Particle Settings
+	enemyParticles: {
+		"basicEnemy": {
+			hurtParticle: { particleID: "basicBurst" },
+			deathParticle: { particleID: "basicImageBurst", imageID: "particle" },
+			trailParticle: { particleID: "basicStream" },
+		},
+		"healthpackEnemyThatShoots": {
+			hurtParticle: { particleID: "basicImageBurst", imageID: "particle" },
+			deathParticle: { particleID: "basicBurst" },
+			shootParticle: { particleID: "basicBurst" },
+		},
+	},
+	
+	
 }

@@ -402,6 +402,7 @@ var app = {
             this.screen.removeAllChildren();
             this.resetGame(); 
             this.screen = new GameScreen();
+			audio.startWaveMusic(this.currentWave);
             this.state = "wavestart";
             this.createPlayer();
             this.screen.healthFill.updateFillbar();
@@ -486,7 +487,11 @@ var app = {
                 
 				// Make a noise
 				audio.playSound(polishSettings.playerSounds.shoot);
-            }
+            
+				// Make a particle
+				effects.tryParticle(polishSettings, "playerShootParticle", { x: xPos, y: yPos});
+				
+			}
         }
         
     },
@@ -541,6 +546,8 @@ var app = {
         else
         {
             app.player.position = {x: app.SCREEN_WIDTH / 2, y: app.SCREEN_HEIGHT /2}
+			app.player.container.visible = true;
+			effects.tryParticle(polishSettings, "playerTrailParticle", app.player.position);
         }
     },
 
