@@ -129,7 +129,7 @@ class LoadingScreen extends createjs.Container
         this.addChild(this.fillShape);
 		
         //Create a text object
-		var newText = new createjs.Text("LOADING", "40px Titan One", '#362868');
+		var newText = new createjs.Text("LOADING", "40px " + polishSettings.font, '#362868');
         newText.x = app.SCREEN_WIDTH /2; //positions the text
         newText.y = app.SCREEN_HEIGHT /2 - 50;
         newText.textAlign = "center";
@@ -146,7 +146,7 @@ class LoadingScreen extends createjs.Container
         this.addChild(this.fillbar);
 
         // Add Percentage Text
-		this.percentText = new createjs.Text("0%", "26px Titan+One", '#362868');
+		this.percentText = new createjs.Text("0%", "26px " + polishSettings.font, '#362868');
         this.percentText.x = app.SCREEN_WIDTH / 2 + 5; //positions the text
         this.percentText.y = app.SCREEN_HEIGHT / 2 + 45;
         this.percentText.textAlign = "center";

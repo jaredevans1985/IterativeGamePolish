@@ -176,6 +176,12 @@ class Pickup {
 
                 if(this.timeLeft <= 0)
                 {
+					if(this._ambientParticles)
+					{
+						this._ambientParticles.kill();
+						this._ambientParticles = null;	
+					}
+					
                     this.killPickup();
                 }
             }
@@ -200,6 +206,7 @@ class Pickup {
 			{
 				audio.playSound(polishSettings.pickupSounds[this.name].timeout);
 			}
+			
 		}
 		else
 		{
