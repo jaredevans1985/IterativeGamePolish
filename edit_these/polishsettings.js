@@ -130,9 +130,12 @@ var polishSettings = {
 	
 	// Image Settings
 	
-	// An image to appear on the main menu
+	// An image to appear on various screens
 	// Should be 800 x 600
 	mainMenuSplash: "splashscreen",
+	endScreenVictoryImage: "splashscreen",
+	endScreenLossImage: "bg1",
+	
 	
 	// Backgrounds
 	waveImages: [

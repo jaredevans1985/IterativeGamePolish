@@ -1,9 +1,25 @@
 class EndScreen extends ScreenBase
 {
-     constructor()
+     constructor(playerIsAlive)
      {
         super();
 
+		// Add a background
+		if(playerIsAlive)
+		{
+			if(polishSettings.endScreenVictoryImage)
+			{	
+				this.addChild(new createjs.Bitmap(assets.getResult(polishSettings.endScreenVictoryImage)));
+			}	
+		}
+		else
+		{
+			if(polishSettings.endScreenLossImage)
+			{	
+				this.addChild(new createjs.Bitmap(assets.getResult(polishSettings.endScreenLossImage)));
+			}
+		}
+		
         // Make a title
         ui.makeText(this, "GAME OVER", app.SCREEN_WIDTH / 2, 100, ui.titleFont.font, ui.titleFont.color);
 

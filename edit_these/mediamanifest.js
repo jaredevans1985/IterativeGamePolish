@@ -25,4 +25,16 @@ var mediaManifest = [
         src: "edit_these/media/images/bg2.jpg",
 		id: "bg2"
 	},
+	{
+        src: "edit_these/media/images/player.png",
+		id: "player"
+	},
+	{
+        src: "edit_these/media/images/tallenemy.png",
+		id: "tallbaddie"
+	},
+	{
+        src: "edit_these/media/images/shootyenemy.png",
+		id: "shooter"
+	},
 ]

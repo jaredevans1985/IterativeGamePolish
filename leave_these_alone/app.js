@@ -461,7 +461,7 @@ var app = {
             case "gameover":
             effects.clearAllParticles();
             this.screen.removeAllChildren();
-            this.screen = new EndScreen();
+            this.screen = new EndScreen(this.player.health > 0);
             this.state = "gameover";
             break;
 
