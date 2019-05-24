@@ -51,7 +51,7 @@ var effects = {
 	getNewEmitter: function()
 	{
 		var newEmitter = new Emitter();
-		newEmitter.parent = app.stage;	// Setting a default parent
+		newEmitter.topLevel = app.gamespace;	// Setting a default parent
 		newEmitter.emitterArray = app.particleEmitters;	// What array will hold a reference to this emitter
 		newEmitter.assetList = assets;	// What object holds the loaded results from PreloadJS
 		app.particleEmitters.push( newEmitter );

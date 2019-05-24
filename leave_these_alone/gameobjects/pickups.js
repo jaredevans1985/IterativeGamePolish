@@ -3,6 +3,29 @@ class Pickup {
     {
         // Save our info
         this.info = info;
+		
+		// Set the name
+        this._name = name;
+		
+		// set position
+		this._position = {x: 0, y: 0};
+        this._position.x = xPos + ((Math.random() * 70) - 35);
+        this._position.y = yPos + ((Math.random() * 70) - 35);
+
+        if(this._position.x < 20)    this.position.x = 20;
+        if(this._position.x > app.SCREEN_WIDTH - 20)    this.position.x = app.SCREEN_WIDTH - 20;
+        if(this._position.y < 20)    this.position.y = 20;
+        if(this._position.y > app.SCREEN_HEIGHT - 20)    this.position.y = app.SCREEN_HEIGHT - 20;
+
+        this._rotation = 0;
+
+		// Try to create ambient particles and spawn particle
+		this._ambientParticles = null;
+		if(this.pickupHasParticles())
+		{
+			effects.tryParticle(polishSettings.pickupParticles[this._name], "spawnParticle", this._position);
+			this._ambientParticles = effects.tryParticle(polishSettings.pickupParticles[this._name], "ambientParticle", this._position);
+		}
 
         // create and parent the image
         this._container = new createjs.Container();
@@ -30,19 +53,6 @@ class Pickup {
             console.log("WARNING: textColor is not defined for " + name);
         }
 
-        // Set the name
-        this._name = name;
-
-        this._position = {x: 0, y: 0};
-        this._position.x = xPos + ((Math.random() * 70) - 35);
-        this._position.y = yPos + ((Math.random() * 70) - 35);
-
-        if(this._position.x < 20)    this.position.x = 20;
-        if(this._position.x > app.SCREEN_WIDTH - 20)    this.position.x = app.SCREEN_WIDTH - 20;
-        if(this._position.y < 20)    this.position.y = 20;
-        if(this._position.y > app.SCREEN_HEIGHT - 20)    this.position.y = app.SCREEN_HEIGHT - 20;
-
-        this._rotation = 0;
 
         // Set the attributes of the container
         this._container.x = this._position.x;
@@ -197,7 +207,13 @@ class Pickup {
 			if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].pickup)
 			{
 				audio.playSound(polishSettings.pickupSounds[this.name].pickup);
-			}	
+			}
+			
+			// Try to do pickup particles
+			if(this.pickupHasParticles())
+			{
+				effects.tryParticle(polishSettings.pickupParticles[this._name], "pickupParticle", this._position);
+			}
 		}
     }
 
@@ -247,8 +263,20 @@ class Pickup {
             console.log("ERROR: A " + this._name + " was picked up but no change settings were found or noe of them were equal to a value other than 0");
         }
 
+		if(this._ambientParticles)
+		{
+			this._ambientParticles.kill();
+			this._ambientParticles = null;	
+		}
+		
+
         this.killPickup();
 
     }
+	
+	pickupHasParticles()
+	{
+		return polishSettings.pickupParticles[this._name] !== undefined;
+	}
 
 }

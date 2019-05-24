@@ -3,6 +3,9 @@ class Enemy {
     {
         // Save our info
         this.info = info;
+		
+		// Set the name
+        this._name = name;
 
         // Set the position and rotation
         var x = -50;
@@ -43,10 +46,8 @@ class Enemy {
         this._position = {x: x, y: y};
         this._rotation = 0;
 		
-		// Set the name
-        this._name = name;
-		
 		// Try to create trail particles
+		this._trail = null;
 		if(this.enemyHasParticles())
 		{
 			this._trail = effects.tryParticle(polishSettings.enemyParticles[this._name], "trailParticle", this._position);
@@ -251,7 +252,15 @@ class Enemy {
                 {
                     this.shootTimer = this.info.bulletSettings.fireRate;
 
-                    app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings));
+					var bulletParticle = null;
+					
+					// Test for death particle for bullet
+					if(polishSettings.enemyParticles[this._name])
+					{
+						bulletParticle = { definition: polishSettings.enemyParticles[this._name], ID: "bulletHitParticle" };
+					}
+
+                    app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings, bulletParticle));
 					
 					// Play shoot sound if one exists
 					if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].shoot)
@@ -392,7 +401,7 @@ class Enemy {
 	
 	enemyHasParticles()
 	{
-		return this._name !== null;
+		return polishSettings.enemyParticles[this._name] !== undefined;
 	}
 
 }

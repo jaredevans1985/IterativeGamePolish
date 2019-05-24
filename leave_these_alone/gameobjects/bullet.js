@@ -1,5 +1,5 @@
 class Bullet {
-    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1)
+    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null)
     {
         // create and parent the image
         this._container = new createjs.Container();
@@ -54,6 +54,12 @@ class Bullet {
             this.debugShape.graphics.beginStroke("black").drawCircle(0,0, this._radius/this.container.scale);
             this._container.addChild(this.debugShape);
         }
+		
+		// If there's a death particle, set it
+		if(deathParticleInfo)
+		{
+			this._deathParticleInfo = deathParticleInfo;
+		}
     }
 
     get container() { return this._container; }
@@ -135,13 +141,19 @@ class Bullet {
 
     onCollision(collidingObject)
     {
+		// If there's a death particle, fire it off
+		if(this._deathParticleInfo)
+		{
+			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this._position);
+		}
+		
         this.killBullet();
     }
 
 }
 
 class EnemyBullet {
-    constructor(parent, name = "eBullet", x = 0, y = 0, rotation = 0, bulletInfo)
+    constructor(parent, name = "eBullet", x = 0, y = 0, rotation = 0, bulletInfo, deathParticleInfo = null)
     {
         // create and parent the image
         this._container = new createjs.Container();
@@ -189,6 +201,12 @@ class EnemyBullet {
             this.debugShape.graphics.beginStroke("black").drawCircle(0,0, this._radius);
             this._container.addChild(this.debugShape);
         }
+		
+		// If there's a death particle, set it
+		if(deathParticleInfo)
+		{
+			this._deathParticleInfo = deathParticleInfo;
+		}
     }
 
     get container() { return this._container; }
@@ -271,6 +289,11 @@ class EnemyBullet {
 
     onCollision(collidingObject)
     {
+		if(this._deathParticleInfo)
+		{
+			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this._position);
+		}
+		
         this.killBullet();
     }
 

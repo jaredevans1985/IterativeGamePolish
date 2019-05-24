@@ -1,6 +1,6 @@
 // Define and create a single particle object
 function Particle () {
-	this.parent = null;
+	this.topLevel = null;
 	this.assetList = null;
 	this.lifetime = 100;
 	this.startingLifetime = 0;
@@ -101,7 +101,7 @@ function Particle () {
 			createjs.Tween.get(this.particleVisual)
 				.to({ alpha: this.endColor.a, useTicks: true }, this.lifetime * 1000);
 
-			this.parent.addChild(this.particleVisual);
+			this.topLevel.addChild(this.particleVisual);
 		}
 		
 		// If we don't have a gradient fill, and we're a shape, then we need to clear 
@@ -148,7 +148,7 @@ function Particle () {
 	
 	// Remove this object from the stage
 	this.dispose = function() {
-		this.parent.removeChild(this.particleVisual);
+		this.topLevel.removeChild(this.particleVisual);
 	};
 }
 
@@ -158,7 +158,7 @@ function Emitter () {
 	// Emitter settings
 	this.particles = [];
 	this.maxParticleCount = 100;
-	this.parent = null;
+	this.topLevel = null;
 	this.emitterArray = null;
 	this.assetList = null;
 	this.relativeTo = null;
@@ -200,7 +200,7 @@ function Emitter () {
 	this.spawnParticle = function()
 	{
 		var p = new Particle();
-		p.parent = this.parent;
+		p.topLevel = this.topLevel;
 		p.assetList = this.assetList;
 		p.lifetime = rand(this.lifetime.min, this.lifetime.max);
 		

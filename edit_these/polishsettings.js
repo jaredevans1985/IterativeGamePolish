@@ -44,6 +44,7 @@ var polishSettings = {
 		},
 	},
 	
+	// Different music that can start at each wave specified
 	waveMusic: [
 		{
 			waveNumber: 1,
@@ -59,20 +60,40 @@ var polishSettings = {
 	playerTrailParticle: { particleID: "basicImageStream", imageID: "particle"},	// A trail of particles that follows the player (use a stream)
 	playerDeathParticle: { particleID: "basicImageBurst", imageID: "particle" }, // particle effect for when the player dies
 	playerHurtParticle: {particleID: "basicBurst"},	// effect when player is hit by something
+	playerBulletHitParticle: { particleID: "basicImageBurst", imageID: "particle" },	// effect when player's bullet hits something
 	
 	// Enemy Particle Settings
 	enemyParticles: {
+		// "enemyname": {
+			// hurtParticle: { particleID: "basicBurst" },	// When the enemy is hit
+			// deathParticle: { particleID: "basicImageBurst", imageID: "particle" },	// When the enemy dies
+			// trailParticle: { particleID: "basicStream" },	// An ambient trail that follows the enemy
+		// },
 		"basicEnemy": {
-			hurtParticle: { particleID: "basicBurst" },
-			deathParticle: { particleID: "basicImageBurst", imageID: "particle" },
-			trailParticle: { particleID: "basicStream" },
+			hurtParticle: { particleID: "basicBurst" },	// When the enemy is hit
+			deathParticle: { particleID: "basicImageBurst", imageID: "particle" },	// When the enemy dies
+			trailParticle: { particleID: "basicStream" },	// An ambient trail that follows the enemy
 		},
 		"healthpackEnemyThatShoots": {
 			hurtParticle: { particleID: "basicImageBurst", imageID: "particle" },
 			deathParticle: { particleID: "basicBurst" },
-			shootParticle: { particleID: "basicBurst" },
+			shootParticle: { particleID: "basicBurst" },	// An effect when the enemy shoots
+			bulletHitParticle: {particleID: "basicBurst"},	// The effect when an enemy bullet hits something
 		},
 	},
 	
+	// Pickup Particle Settings
+	pickupParticles: {
+		// "pickupname": {
+			// spawnParticle: { particleID: "basicBurst" },	// When this pickup spawns
+			// ambientParticle: { particleID: "basicStream" },	// An ambient particle while it exists
+			// pickupParticle: { particleID: "basicImageBurst", imageID: "particle" },	// An effect when it's collected
+		// },
+		"coin1": {
+			spawnParticle: { particleID: "basicBurst" },	// When this pickup spawns
+			ambientParticle: { particleID: "basicStream" },	// An ambient particle while it exists
+			pickupParticle: { particleID: "basicImageBurst", imageID: "particle" },	// An effect when it's collected
+		},
+	},
 	
 }

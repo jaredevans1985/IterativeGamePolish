@@ -67,6 +67,9 @@ var app = {
     // Mouse pos tracker
     mousePos: {x: 0, y: 0},
 
+	// Is mouse up or down
+	mouseDown: false,
+
     // Setup the canvas
     setupCanvas: function() {
       this.canvas = document.getElementById("game"); //get canvas with id='game'
@@ -101,6 +104,9 @@ var app = {
         });
         this.stage.on("stagemousedown", function (evt) {
             app.handleMouseDown(evt);
+        });
+		this.stage.on("stagemouseup", function (evt) {
+            app.handleMouseUp(evt);
         });
 
         // Set up our basic keyboard inputs 
@@ -182,6 +188,41 @@ var app = {
 				if(app.fireRateTimer >= 0)
 				{
 					app.fireRateTimer -= dt;
+				}
+
+				// Try and fire a bullet
+				if(app.fireRateTimer <= 0 && app.mouseDown)
+				{
+					var offset = 30;
+					var xPos = app.player.position.x + (Math.cos(app.player.getRotationRadians()) * offset);
+					var yPos = app.player.position.y + (Math.sin(app.player.getRotationRadians()) * offset);
+							
+					var bulletParticle = null;
+					
+					// Test for death particle for bullet
+					if(polishSettings.playerBulletHitParticle)
+					{
+						bulletParticle = { definition: polishSettings, ID: "playerBulletHitParticle" };
+					}
+					
+					app.bullets.push(new Bullet(app.gamespace, "bullet" + app.bullets.length, xPos, yPos, app.player.rotation, playerSettings.bulletSize, bulletParticle));
+					app.fireRateTimer = 2;
+
+					if(playerSettings.fireRate)
+					{
+						app.fireRateTimer = playerSettings.fireRate;
+					}
+					else
+					{
+						console.log("ERROR: playerSettings.fireRate is not defined");
+					}
+					
+					// Make a noise
+					audio.playSound(polishSettings.playerSounds.shoot);
+				
+					// Make a particle
+					effects.tryParticle(polishSettings, "playerShootParticle", { x: xPos, y: yPos});
+					
 				}
 
 				var moveSpeed = 50;
@@ -467,33 +508,19 @@ var app = {
 
         if((this.state == "inwave" || this.state == "wavestart" || this.state == "postwave") && app.player.health > 0)
         {
-            // fire a bullet
-            if(this.fireRateTimer <= 0)
-            {
-                var offset = 30;
-                var xPos = app.player.position.x + (Math.cos(app.player.getRotationRadians()) * offset);
-		        var yPos = app.player.position.y + (Math.sin(app.player.getRotationRadians()) * offset);
-                app.bullets.push(new Bullet(this.gamespace, "bullet" + app.bullets.length, xPos, yPos, app.player.rotation, playerSettings.bulletSize));
-                this.fireRateTimer = 2;
-
-                if(playerSettings.fireRate)
-                {
-                    this.fireRateTimer = playerSettings.fireRate;
-                }
-                else
-                {
-                    console.log("ERROR: playerSettings.fireRate is not defined");
-                }
-                
-				// Make a noise
-				audio.playSound(polishSettings.playerSounds.shoot);
-            
-				// Make a particle
-				effects.tryParticle(polishSettings, "playerShootParticle", { x: xPos, y: yPos});
-				
-			}
+			
+			this.mouseDown = true;
         }
-        
+    },
+	
+	// When the mouse is let go of, pass it on to the appropriate places
+    handleMouseUp: function(evt)
+    {
+
+        if((this.state == "inwave" || this.state == "wavestart" || this.state == "postwave") && app.player.health > 0)
+        {
+			this.mouseDown = false;
+        }
     },
 
     // Change the score by the given amount
