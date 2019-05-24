@@ -137,7 +137,7 @@ var polishSettings = {
 	endScreenLossImage: "bg1",
 	
 	
-	// Backgrounds
+	// Wave Backgrounds
 	waveImages: [
 		{
 			waveNumber: 1,
@@ -148,5 +148,8 @@ var polishSettings = {
 			imageID: "bg2",
 		},
 	],
+	
+	// Player image
+	playerImage: "bg2",
 	
 }
