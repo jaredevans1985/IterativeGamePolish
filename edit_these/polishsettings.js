@@ -1,9 +1,28 @@
+// Welcome to the monster! =)
+// This file includes settings for sounds, particles, font style, UI color, and images
+// Use the comments for help and ask questions when needed
 var polishSettings = {
 	
 	// The name of the font you want to use
 	// Must be from the google fonts api
 	// Fonts can found here: https://fonts.google.com/ 
 	font: "Titan One",
+	fontColor: '#362868',	// hex, html and rgba colors should work here
+	
+	// Set up some default color values
+	// Used by things like buttons and other UI elements
+    colors : {
+        default : '#957bf2',	// normal button color
+        dark : '#362868',	// fillbarBackground, button pressed color
+        light : '#dad1f9',	// highlight color for buttons
+        background : '#fff291',	// default background color of UI screens
+		fillbarText: 'white',	// text color of text in fillbars
+		pickupTimerFillbarText: "SaddleBrown", // color of the text in pickup life timer bar
+		healthFill: 'rgba(255, 0, 0, 255)',	// color of the fill for player health bar
+		enemyHealthFill: 'rgba(255, 0, 0, 255)',	// color of the fill for enemy health bar
+		pickupTimeFill: 'orange',	// color of the fill for pickup life timer
+		progressFill: 'teal',	// color of the fill for the progress bar
+    },
 	
 	// If the text in the middle of your fillbars is off,
 	// add a positive or negative offset to adjust it up or down

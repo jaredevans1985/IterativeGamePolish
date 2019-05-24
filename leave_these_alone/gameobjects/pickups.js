@@ -46,7 +46,7 @@ class Pickup {
 
         var dispText = info.displayText ? info.displayText : "WARNING: displayText not defined"
         
-        this.text = ui.makeText(this._container, dispText, 0,0, (this.info.imageSize - 0) + "px " + polishSettings.font, this.info.textColor ? this.info.textColor : ui.colors.dark, "center");;
+        this.text = ui.makeText(this._container, dispText, 0,0, (this.info.imageSize - 0) + "px " + polishSettings.font, this.info.textColor ? this.info.textColor : polishSettings.colors.dark, "center");;
 
         if(!info.textColor)
         {
@@ -81,7 +81,7 @@ class Pickup {
             }
         };
         var barPos = this.info.imageSize ? this.info.imageSize : 20;
-        this.timerBar = ui.makeFillbar(this._container, 0, 10 + barPos, 30, 8, ui.colors.dark, "orange", "8px " + polishSettings.font, "SaddleBrown", callback, 2);
+        this.timerBar = ui.makeFillbar(this._container, 0, 10 + barPos, 30, 8, polishSettings.colors.dark, polishSettings.colors.pickupTimeFill, "8px " + polishSettings.font, polishSettings.colors.pickupTimerFillbarText, callback, 2);
         this.timerBar.container.visible = false;
 
         this.timeLeft = this.info.timeToLive ? this.info.timeToLive : 3;

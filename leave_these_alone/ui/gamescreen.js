@@ -25,7 +25,7 @@ class GameScreen extends ScreenBase
             this.text.text = app.player.health + " / " + app.player.maxHealth;
         };
 
-        this.healthFill = ui.makeFillbar(this, 115, 25, 200, 25, ui.colors.dark, "red", "14px " + polishSettings.font, "white", callback );
+        this.healthFill = ui.makeFillbar(this, 115, 25, 200, 25, polishSettings.colors.dark, polishSettings.colors.healthFill, "14px " + polishSettings.font, polishSettings.colors.fillbarText, callback );
         ui.makeText(this, "HEALTH", 15, 50, "16px " + polishSettings.font, ui.defaultFont.color, "left");
 
         var callback2 = function()
@@ -40,7 +40,7 @@ class GameScreen extends ScreenBase
                 console.log("ERROR: enemyList is not defined for the current list in waveDefs");
             }
         };
-        this.waveFill = ui.makeFillbar(this, app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 30, 350, 30, ui.colors.dark, "teal", "18px " + polishSettings.font, "white", callback2 );
+        this.waveFill = ui.makeFillbar(this, app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 30, 350, 30, polishSettings.colors.dark, polishSettings.colors.progressFill, "18px " + polishSettings.font, polishSettings.colors.fillbarText, callback2 );
         ui.makeText(this, "ENEMIES CLEARED", app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 55, "18px " + polishSettings.font, ui.defaultFont.color, "center");
 
         this.damageText = ui.makeText(this, "DAMAGE: +0", 15, 70, "14px " + polishSettings.font, ui.defaultFont.color, "left");

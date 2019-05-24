@@ -117,7 +117,7 @@ class Enemy {
             }
         };
         var barPos = this.info.enemySize ? this.info.enemySize : 20;
-        this.healthBar = ui.makeFillbar(this.container, 0, -10 - barPos, 75, 15, ui.colors.dark, "red", "12px " + polishSettings.font, "white", callback, 2);
+        this.healthBar = ui.makeFillbar(this.container, 0, -10 - barPos, 75, 15, polishSettings.colors.dark, polishSettings.colors.enemyHealthFill, "12px " + polishSettings.font, "white", callback, 2);
         this.healthBar.container.visible = false;
 
         if(this.info.bulletSettings)

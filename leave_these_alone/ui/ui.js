@@ -1,19 +1,11 @@
 // This object contains some default values and helper function for setting up UI
 var ui = {
 
-    // Set up some default values
-    colors : {
-        default : '#957bf2',
-        dark : '#362868',
-        light : '#dad1f9',
-        background : '#fff291',
-    },
-
     // fonts
-    defaultFont: { font: "26px " + polishSettings.font, color: '#362868' },
-    headerFont: { font: "24px " + polishSettings.font, color: '#362868' },
-    titleFont: { font: "40px " + polishSettings.font, color: '#362868' },
-    buttonFont: { font: "20px " + polishSettings.font, color: '#362868' },
+    defaultFont: { font: "26px " + polishSettings.font, color: polishSettings.fontColor },
+    headerFont: { font: "24px " + polishSettings.font, color: polishSettings.fontColor },
+    titleFont: { font: "40px " + polishSettings.font, color: polishSettings.fontColor },
+    buttonFont: { font: "20px " + polishSettings.font, color: polishSettings.fontColor },
 
     // A handy function for creating text
     makeText(container, text = "", x = 0, y = 0, font = this.defaultFont.font, color = this.defaultFont.color, alignment = "center")
@@ -41,16 +33,16 @@ var ui = {
         newButton.toggledOn = true;
 
         // Our colors, either the defaults, or pulled from colorInfo
-        newButton.color = ui.colors.default;
-        newButton.highlightColor = ui.colors.light;
-        newButton.pressedColor = ui.colors.dark;
+        newButton.color = polishSettings.colors.default;
+        newButton.highlightColor = polishSettings.colors.light;
+        newButton.pressedColor = polishSettings.colors.dark;
         newButton.offColor = "#ddd";
 
         if(colorInfo)
         {
-            newButton.color = colorInfo.color ? colorInfo.color : ui.colors.default;
-            newButton.highlightColor = colorInfo.highlightColor ? colorInfo.highlightColor : ui.colors.light;
-            newButton.pressedColor = colorInfo.pressedColor ? colorInfo.pressedColor : ui.colors.dark;
+            newButton.color = colorInfo.color ? colorInfo.color : polishSettings.colors.default;
+            newButton.highlightColor = colorInfo.highlightColor ? colorInfo.highlightColor : polishSettings.colors.light;
+            newButton.pressedColor = colorInfo.pressedColor ? colorInfo.pressedColor : polishSettings.colors.dark;
             newButton.offColor = colorInfo.offColor ? colorInfo.offColor : "#ddd";
         }
         
@@ -115,7 +107,7 @@ var ui = {
         return newButton;
     },
 
-    makeFillbar(parent, x, y, w, h, backColor = ui.colors.dark, fillColor = ui.color.light, textFont = ui.defaultFont.font, textColor = "white", callback, borderSize = 5)
+    makeFillbar(parent, x, y, w, h, backColor = polishSettings.colors.dark, fillColor = polishSettings.color.light, textFont = ui.defaultFont.font, textColor = polishSettings.color.fillbarText, callback, borderSize = 5)
     {
         var fillbar = {};
 

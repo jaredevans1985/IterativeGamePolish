@@ -1,6 +1,6 @@
 class ScreenBase extends createjs.Container
 {
-     constructor(c = ui.colors.background, w = app.SCREEN_WIDTH, h = app.SCREEN_HEIGHT)
+     constructor(c = polishSettings.colors.background, w = app.SCREEN_WIDTH, h = app.SCREEN_HEIGHT)
      {
         super();    
 
