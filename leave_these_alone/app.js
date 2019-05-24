@@ -14,6 +14,9 @@ var app = {
     SCREEN_WIDTH: 800,
     SCREEN_HEIGHT: 600,
     screen: null,
+	
+	// The wave background color or image
+	background: null,
 
     // Keep track of the game time
     elapsedTime: 0, // total app time
@@ -83,13 +86,17 @@ var app = {
     init: function () {
         // Sets up the canvas and our screen
         this.setupCanvas(); 
-        this.gamespace = new createjs.Container();
+		
+		this.background = new createjs.Container();
+        var fillShape = new createjs.Shape();
+		fillShape.graphics.beginFill(polishSettings.colors.background).dr(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
+        this.background.addChild(fillShape);
+		this.stage.addChild(this.background);
+        
+		this.gamespace = new createjs.Container();
         this.gamespace.setBounds(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
-        var background = new createjs.Shape();
-        background.graphics.beginFill('#adff5b').dr(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
         this.stage.addChild(this.gamespace);
-        this.gamespace.addChild(background);
-
+        
         this.screen = new createjs.Container();
         this.screen.setBounds(0, 0, this.SCREEN_WIDTH, this.SCREEN_HEIGHT);
         this.stage.addChild(this.screen);
@@ -448,7 +455,7 @@ var app = {
             this.createPlayer();
             this.screen.healthFill.updateFillbar();
             this.nextSpawnTime = 0.25;
-            app.screen.waveFill.updateFillbar();
+            app.screen.waveFill.updateFillbar();			
             break;
 
             case "gameover":
@@ -650,6 +657,19 @@ var app = {
         {
             app.screen.waveFill.updateFillbar();
         }
+
+		// Add a background if one is specified
+		if(polishSettings.waveImages && polishSettings.waveImages.length > 0)
+		{	
+			for(var i = 0; i < polishSettings.waveImages.length; i++ )
+			{
+				if(polishSettings.waveImages[i].waveNumber == this.currentWave)
+				{
+					this.background.removeAllChildren();
+					this.background.addChild(new createjs.Bitmap(assets.getResult(polishSettings.waveImages[i].imageID)));
+				}
+			}
+		}
     }
 
 }

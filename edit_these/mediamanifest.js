@@ -13,4 +13,16 @@ var mediaManifest = [
         src: "edit_these/media/images/particle.png",
 		id: "particle"
 	},
+	{
+        src: "edit_these/media/images/splashscreen.jpg",
+		id: "splashscreen"
+	},
+	{
+        src: "edit_these/media/images/bg1.jpg",
+		id: "bg1"
+	},
+	{
+        src: "edit_these/media/images/bg2.jpg",
+		id: "bg2"
+	},
 ]

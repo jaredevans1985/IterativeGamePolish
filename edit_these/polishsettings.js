@@ -128,4 +128,22 @@ var polishSettings = {
 		},
 	},
 	
+	// Image Settings
+	
+	// An image to appear on the main menu
+	// Should be 800 x 600
+	mainMenuSplash: "splashscreen",
+	
+	// Backgrounds
+	waveImages: [
+		{
+			waveNumber: 1,
+			imageID: "bg1",
+		},
+		{
+			waveNumber: 2,
+			imageID: "bg2",
+		},
+	],
+	
 }

@@ -17,21 +17,21 @@ var gameSettings = {
             spawnRateRandomizer: 3, // How much time, in seconds, might be added or substracted from the next spawn time, keep this shorter than your spawnrate
             enemyList: [            // What enemies will spawn this wave. Enemies will spawn in this order.
                 "basicEnemy", 
-                "basicEnemy", 
+                //"basicEnemy", 
                 //"healthpackEnemyThatShoots", 
             ],
         },
-        // {
-            // waveName: "Final Wave", // On this wave, it will show Final Wave, rather than "Wave #", because "default" was not used
-            // spawnRate: 3,           
-            // spawnRateRandomizer: 2, 
-            // enemyList: [            
-                // "basicEnemy",
-                // "healthpackEnemyThatShoots",
-                // "healthpackEnemyThatShoots",
-                // "basicEnemy",
-                // "bossEnemy",
-            // ]
-        // }
+        {
+            waveName: "Final Wave", // On this wave, it will show Final Wave, rather than "Wave #", because "default" was not used
+            spawnRate: 3,           
+            spawnRateRandomizer: 2, 
+            enemyList: [            
+                "basicEnemy",
+                "healthpackEnemyThatShoots",
+                "healthpackEnemyThatShoots",
+                "basicEnemy",
+                "bossEnemy",
+            ]
+        }
     ],
 }
