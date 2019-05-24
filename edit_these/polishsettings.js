@@ -33,9 +33,9 @@ var polishSettings = {
 	
 	// Audio settings
 	playerSounds: {
-		shoot: 'click',
-		hurt: 'click',
-		die: 'click',
+		shoot: 'click',	// When the player shoots
+		hurt: 'click',	// When the player is hurt
+		die: 'click',	// When the player dies
 	},
 	
 	enemySounds: {
