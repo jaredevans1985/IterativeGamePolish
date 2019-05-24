@@ -195,6 +195,8 @@ class Actor {
 			// do a particle
 			effects.clearAllParticles();
 			effects.tryParticle(polishSettings, "playerDeathParticle", this._position);
+			// start some music
+			audio.startFinalMusic(false);
         }
 		else
 		{

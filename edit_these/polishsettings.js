@@ -52,6 +52,9 @@ var polishSettings = {
 		},
 	],
 	
+	victoryMusic: "music",	// music that plays if you win (all waves completed)
+	lossMusic: "music",	// music that plays if you lose
+	
 	// Player Particle settings
 	// If you don't want one of these enabled, comment out the line
 	// imageID is only required for image particle effects

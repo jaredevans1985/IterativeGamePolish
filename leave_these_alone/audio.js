@@ -9,7 +9,7 @@ var audio = {
     musicPlaying : true,
 	
 	// What is the current music track
-	musicID: "music",
+	musicID: "",
 
     // Play the sound with the given id
     playSound : function(id)
@@ -58,6 +58,41 @@ var audio = {
 		{
 			createjs.Sound.play(this.musicID, {loop:-1});
 			this.musicPlaying = true;
+		}
+	},
+	
+	// Start final music
+	startFinalMusic: function(playerWon)
+	{
+		if(playerWon)
+		{
+			if(polishSettings.victoryMusic)
+			{
+				// Stop music if currently playing
+				if(this.musicID != "")
+				{
+					createjs.Sound.stop(this.musicID);
+				}
+				
+				this.musicID = polishSettings.victoryMusic;
+				createjs.Sound.play(this.musicID, {loop:-1});
+				this.musicPlaying = true;
+			}
+		}
+		else
+		{
+			if(polishSettings.lossMusic)
+			{
+				// Stop music if currently playing
+				if(this.musicID != "")
+				{
+					createjs.Sound.stop(this.musicID);
+				}
+				
+				this.musicID = polishSettings.lossMusic;
+				createjs.Sound.play(this.musicID, {loop:-1});
+				this.musicPlaying = true;
+			}
 		}
 	},
 

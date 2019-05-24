@@ -238,8 +238,8 @@ class Enemy {
 
         if(areActorsColliding(enemy, app.player))
         {
+			app.player.onCollision(enemy);
             enemy.onCollision(app.player);
-            app.player.onCollision(enemy);
         }
 
         if(this.info.bulletSettings)
@@ -376,9 +376,11 @@ class Enemy {
                     app.screen.waveText.text += " COMPLETE";
                     app.clearGameObjects(false);
 
-                    if (app.currentWave > gameSettings.waveDefs.length)
+                    if (app.currentWave > gameSettings.waveDefs.length && app.player.health > 0)
                     {
                         app.screen.waveText.text = gameSettings.victoryMessage;
+						
+						audio.startFinalMusic(true);
                     }
                 }
             }
