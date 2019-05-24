@@ -11,11 +11,11 @@ class GameScreen extends ScreenBase
         this.scoreUI = ui.makeText(this, app.score, app.SCREEN_WIDTH - 15, 25, ui.defaultFont.font, ui.defaultFont.color, "right");
      
         // Displays text in between waves
-        this.waveText = ui.makeText(this, "", 400, 200, "50px Titan One", "rgba(0, 0, 0, 255)", "center");
+        this.waveText = ui.makeText(this, "", 400, 200, "50px " + polishSettings.font, "rgba(0, 0, 0, 255)", "center");
         this.waveText.alpha = 0;
         this.updateWaveText();
 
-        ui.makeText(this, "COINS", app.SCREEN_WIDTH - 15, 45, "16px Titan One", ui.defaultFont.color, "right");
+        ui.makeText(this, "COINS", app.SCREEN_WIDTH - 15, 45, "16px " + polishSettings.font, ui.defaultFont.color, "right");
      
 
         // Health bar
@@ -25,8 +25,8 @@ class GameScreen extends ScreenBase
             this.text.text = app.player.health + " / " + app.player.maxHealth;
         };
 
-        this.healthFill = ui.makeFillbar(this, 115, 25, 200, 25, ui.colors.dark, "red", "14px Titan One", "white", callback );
-        ui.makeText(this, "HEALTH", 15, 45, "16px Titan One", ui.defaultFont.color, "left");
+        this.healthFill = ui.makeFillbar(this, 115, 25, 200, 25, ui.colors.dark, "red", "14px " + polishSettings.font, "white", callback );
+        ui.makeText(this, "HEALTH", 15, 50, "16px " + polishSettings.font, ui.defaultFont.color, "left");
 
         var callback2 = function()
         {
@@ -40,12 +40,12 @@ class GameScreen extends ScreenBase
                 console.log("ERROR: enemyList is not defined for the current list in waveDefs");
             }
         };
-        this.waveFill = ui.makeFillbar(this, app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 30, 350, 30, ui.colors.dark, "teal", "18px Titan One", "white", callback2 );
-        ui.makeText(this, "ENEMIES CLEARED", app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 55, "18px Titan One", ui.defaultFont.color, "center");
+        this.waveFill = ui.makeFillbar(this, app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 30, 350, 30, ui.colors.dark, "teal", "18px " + polishSettings.font, "white", callback2 );
+        ui.makeText(this, "ENEMIES CLEARED", app.SCREEN_WIDTH / 2, app.SCREEN_HEIGHT - 55, "18px " + polishSettings.font, ui.defaultFont.color, "center");
 
-        this.damageText = ui.makeText(this, "DAMAGE: +0", 15, 70, "14px Titan One", ui.defaultFont.color, "left");
-        this.healthText = ui.makeText(this, "HEALTH: +0", 15, 85, "14px Titan One", ui.defaultFont.color, "left");
-        this.speedText = ui.makeText(this, "SPEED: +0", 15, 100, "14px Titan One", ui.defaultFont.color, "left");
+        this.damageText = ui.makeText(this, "DAMAGE: +0", 15, 70, "14px " + polishSettings.font, ui.defaultFont.color, "left");
+        this.healthText = ui.makeText(this, "HEALTH: +0", 15, 85, "14px " + polishSettings.font, ui.defaultFont.color, "left");
+        this.speedText = ui.makeText(this, "SPEED: +0", 15, 100, "14px " + polishSettings.font, ui.defaultFont.color, "left");
 
         this.damageText.visible = false;
         this.healthText.visible = false;

@@ -10,10 +10,10 @@ var ui = {
     },
 
     // fonts
-    defaultFont: { font: "26px Titan One", color: '#362868' },
-    headerFont: { font: "24px Titan One", color: '#362868' },
-    titleFont: { font: "40px Titan One", color: '#362868' },
-    buttonFont: { font: "20px Titan One", color: '#362868' },
+    defaultFont: { font: "26px " + polishSettings.font, color: '#362868' },
+    headerFont: { font: "24px " + polishSettings.font, color: '#362868' },
+    titleFont: { font: "40px " + polishSettings.font, color: '#362868' },
+    buttonFont: { font: "20px " + polishSettings.font, color: '#362868' },
 
     // A handy function for creating text
     makeText(container, text = "", x = 0, y = 0, font = this.defaultFont.font, color = this.defaultFont.color, alignment = "center")
@@ -137,7 +137,7 @@ var ui = {
         fillbar.container.addChild(fillbar.fill);
 
         // Add Percentage Text
-        fillbar.text = ui.makeText(fillbar.container, "", w/2, h/2 - 1, textFont, textColor);
+        fillbar.text = ui.makeText(fillbar.container, "", w/2, h/2 + polishSettings.fillbarCenterOffset, textFont, textColor);
 
         fillbar.updateFillbar = callback;
 

@@ -1,6 +1,16 @@
 var polishSettings = {
 	
-	lossMessage: "YOU HAVE DIED", // Message seen when the player is killed
+	// The name of the font you want to use
+	// Must be from the google fonts api
+	// Fonts can found here: https://fonts.google.com/ 
+	font: "Titan One",
+	
+	// If the text in the middle of your fillbars is off,
+	// add a positive or negative offset to adjust it up or down
+	fillbarCenterOffset: -1,
+	
+	// Message seen when the player is killed
+	lossMessage: "YOU HAVE DIED",
 	
 	// Audio settings
 	playerSounds: {
