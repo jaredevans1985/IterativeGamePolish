@@ -37,4 +37,12 @@ var mediaManifest = [
         src: "edit_these/media/images/shootyenemy.png",
 		id: "shootyenemy"
 	},
+	{
+        src: "edit_these/media/images/playerbullet.png",
+		id: "playerbullet"
+	},
+	{
+        src: "edit_these/media/images/enemybullet.png",
+		id: "enemybullet"
+	},
 ]

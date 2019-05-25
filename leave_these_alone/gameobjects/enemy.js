@@ -274,8 +274,17 @@ class Enemy {
 					{
 						bulletParticle = { definition: polishSettings.enemyParticles[this._name], ID: "bulletHitParticle" };
 					}
+					
+					var bulletImageID = null;
+					var rotationRate = 0;
+					
+					if(polishSettings.bulletImages && polishSettings.bulletImages[this._name] && polishSettings.bulletImages[this._name].imageID)
+					{
+						bulletImageID = polishSettings.bulletImages[this._name].imageID;
+						rotationRate = polishSettings.bulletImages[this._name].rotationRate;
+					}
 
-                    app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings, bulletParticle));
+                    app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings, bulletParticle, bulletImageID, rotationRate));
 					
 					// Play shoot sound if one exists
 					if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].shoot)

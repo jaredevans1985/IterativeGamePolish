@@ -1,12 +1,26 @@
 class Bullet {
-    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null, bulletImage = null)
+    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null, bulletImageID = null, rotationRate = 0)
     {
         // create and parent the image
         this._container = new createjs.Container();
-        this._image = new createjs.Shape();
-        this._image.graphics.beginFill("DarkTurquoise").dr(0, 0, 15, 7.5);
         parent.addChild(this._container);
-        this._container.addChild(this._image);
+		
+		if(bulletImageID)
+		{
+			this._image = new createjs.Bitmap(assets.getResult(bulletImageID));
+			this._image.scaleX = scale / 5;
+			this._image.scaleY = scale / 5;
+		}
+		else
+		{
+			this._image = new createjs.Shape();
+			this._image.graphics.beginFill("DarkTurquoise").dr(0, 0, 15, 7.5);
+			this._image.setBounds(0, 0, 15, 7.5);
+        }
+		
+		this._container.addChild(this._image);
+
+		this._rotationRate = rotationRate;
 
         // Set the name
         this._name = name;
@@ -22,7 +36,6 @@ class Bullet {
         this._container.rotation = this._rotation;    // degrees
 
         // Set a central reg x point
-        this._image.setBounds(0, 0, 15, 7.5);
         this._image.regX = this._image.getBounds().width/2;
         this._image.regY = this._image.getBounds().height/2;
 
@@ -121,6 +134,7 @@ class Bullet {
 		this._position.y += Math.sin(this.getRotationRadians()) *  bulletSpeed  * dt;
         this._container.x = this._position.x;
         this._container.y = this._position.y; 
+		this._image.rotation += this._rotationRate;
 
         if(this._position.x < -10 || this._position.x > app.SCREEN_WIDTH + 10 || this._position.y < -10 || this._position.y > app.SCREEN_HEIGHT + 10)
         {
@@ -153,15 +167,30 @@ class Bullet {
 }
 
 class EnemyBullet {
-    constructor(parent, name = "eBullet", x = 0, y = 0, rotation = 0, bulletInfo, deathParticleInfo = null)
+    constructor(parent, name = "eBullet", x = 0, y = 0, rotation = 0, bulletInfo, deathParticleInfo = null, bulletImageID = null, rotationRate = 0)
     {
         // create and parent the image
         this._container = new createjs.Container();
-        this._image = new createjs.Shape();
-        this._image.graphics.beginFill(bulletInfo.color ? bulletInfo.color : "white").dp(0, 0, bulletInfo.bulletSize ? bulletInfo.bulletSize : 20, 5, 2);
         parent.addChild(this._container);
-        this._container.addChild(this._image);
+        
+		if(bulletImageID)
+		{
+			this._image = new createjs.Bitmap(assets.getResult(bulletImageID));
+			this._image.scaleX = bulletInfo.bulletSize / 13;
+			this._image.scaleY = bulletInfo.bulletSize / 13;
+			this._image.regX = this._image.getBounds().width/2;
+			this._image.regY = this._image.getBounds().height/2;
+		}
+		else
+		{
+			this._image = new createjs.Shape();
+			this._image.graphics.beginFill(bulletInfo.color ? bulletInfo.color : "white").dp(0, 0, bulletInfo.bulletSize ? bulletInfo.bulletSize : 20, 5, 2);
+        }
 
+		this._container.addChild(this._image);
+
+		this._rotationRate = rotationRate;
+		
         if(!bulletInfo.color)
         {
             console.log("WARNING: an enemy is trying to fire a bullet that has no color, using default");
@@ -268,7 +297,7 @@ class EnemyBullet {
 		this._position.y -= Math.sin(this.getRotationRadians()) * bulletSpeed * dt;
         this._container.x = this._position.x;
         this._container.y = this._position.y; 
-        this._image.rotation += 10;
+        this._image.rotation += this._rotationRate;
 
         if(this._position.x < -10 || this._position.x > app.SCREEN_WIDTH + 10 || this._position.y < -10 || this._position.y > app.SCREEN_HEIGHT + 10)
         {

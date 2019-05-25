@@ -12,13 +12,11 @@ var gameSettings = {
     waveDefs: [
         {
             waveName: "default",    // If the name is "default" it will say "Wave" followed by the number, e.g. Wave 1, but if you put in other text it will display that
-            //spawnRate: 5,           // How long it takes, in seconds, before the next enemy appears
             spawnRate: 1,           // How long it takes, in seconds, before the next enemy appears
             spawnRateRandomizer: 3, // How much time, in seconds, might be added or substracted from the next spawn time, keep this shorter than your spawnrate
             enemyList: [            // What enemies will spawn this wave. Enemies will spawn in this order.
-                "basicEnemy", 
-                //"basicEnemy", 
-                //"healthpackEnemyThatShoots", 
+                "healthpackEnemyThatShoots",
+				"basicEnemy", 
             ],
         },
         {

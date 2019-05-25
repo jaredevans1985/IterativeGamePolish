@@ -212,7 +212,17 @@ var app = {
 						bulletParticle = { definition: polishSettings, ID: "playerBulletHitParticle" };
 					}
 					
-					app.bullets.push(new Bullet(app.gamespace, "bullet" + app.bullets.length, xPos, yPos, app.player.rotation, playerSettings.bulletSize, bulletParticle));
+					var bulletImageID = null;
+					var rotationRate = 0;
+					
+					if(polishSettings.bulletImages && polishSettings.bulletImages.player && polishSettings.bulletImages.player.imageID)
+					{
+						bulletImageID = polishSettings.bulletImages.player.imageID;
+						rotationRate = polishSettings.bulletImages.player.rotationRate;
+					}
+					
+					app.bullets.push(new Bullet(app.gamespace, "bullet" + app.bullets.length, xPos, yPos, app.player.rotation, playerSettings.bulletSize, bulletParticle, bulletImageID, rotationRate));
+					
 					app.fireRateTimer = 2;
 
 					if(playerSettings.fireRate)

@@ -159,8 +159,10 @@ var polishSettings = {
 	},
 	
 	// Bullet images
+	// Rotation rate is how fast the bullet image spins while in flight
 	bulletImages: {
-		//"player"
+		"player" : { imageID: "playerbullet", rotationRate: 0 },
+		"healthpackEnemyThatShoots": { imageID: "enemybullet", rotationRate: 10 },
 	},
 	
 	// Pickup images
