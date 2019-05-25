@@ -150,6 +150,19 @@ var polishSettings = {
 	],
 	
 	// Player image
-	playerImage: "bg2",
+	playerImage: "player",
+	
+	// Enemy images
+	enemyImages: {
+		"basicEnemy": "tallenemy",
+		"healthpackEnemyThatShoots": "shootyenemy",
+	},
+	
+	// Bullet images
+	bulletImages: {
+		//"player"
+	},
+	
+	// Pickup images
 	
 }

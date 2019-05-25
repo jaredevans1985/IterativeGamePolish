@@ -31,10 +31,10 @@ var mediaManifest = [
 	},
 	{
         src: "edit_these/media/images/tallenemy.png",
-		id: "tallbaddie"
+		id: "tallenemy"
 	},
 	{
         src: "edit_these/media/images/shootyenemy.png",
-		id: "shooter"
+		id: "shootyenemy"
 	},
 ]

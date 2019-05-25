@@ -10,21 +10,19 @@ class Actor {
 		
         // create and parent the image
         this._container = new createjs.Container();
+		parent.addChild(this._container);
 		
         this._image = null;
 		
 		if(polishSettings.playerImage)
 		{
 			this._image = new createjs.Bitmap(assets.getResult(polishSettings.playerImage));
-			this._image.regX = this._image.getBounds().width/2;
-			this._image.regY = this._image.getBounds().height/2;
 			this._container.addChild(this._image);
 		}
 		else
 		{	
 			this._image = new createjs.Shape();
 			this._image.graphics.beginFill("teal").dr(0, 0, 50, 50);
-			parent.addChild(this._container);
 			this._container.addChild(this._image);
 
 			// make a gun
@@ -32,11 +30,13 @@ class Actor {
 			gun.graphics.beginFill('gray').dr(-7.5, 10, 15, 35);
 			this._container.addChild(gun);
 			
-			// Set a central reg x point
+			// Set a bounds
 			this._image.setBounds(0, 0, 50, 50);
-			this._image.regX = this._image.getBounds().width/2;
-			this._image.regY = this._image.getBounds().height/2;
 		}
+		
+		// Set a central reg x point
+		this._image.regX = this._image.getBounds().width/2;
+		this._image.regY = this._image.getBounds().height/2;
 		
         // Set the name
         this._name = name;

@@ -1,7 +1,7 @@
 
 // Various game settings, including the definition of each wave
 var gameSettings = {
-    DEBUG_MODE_ON: false,   // Set this to true to see the collision radiuses around each game object as black circles
+    DEBUG_MODE_ON: true,   // Set this to true to see the collision radiuses around each game object as black circles
 
     waveStartDelay: 3,  // Before a wave starts, how much time is there for the intro?
     waveIsOverDelay: 3, // After a wave ends, how much time is there before we go to the next wave intro?

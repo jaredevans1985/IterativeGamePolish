@@ -55,10 +55,27 @@ class Enemy {
 
         // create and parent the image
         this._container = new createjs.Container();
-        this._image = new createjs.Shape();
-        this._image.graphics.beginFill(info.color ? info.color : "magenta").dp(0, 0, this.info.enemySize ? this.info.enemySize : 20, this.info.numberOfSides ? this.info.numberOfSides : 6);
         parent.addChild(this._container);
-        this._container.addChild(this._image);
+        
+		
+		if(polishSettings.enemyImages && polishSettings.enemyImages[this._name])
+		{
+			this._image = new createjs.Bitmap(assets.getResult(polishSettings.enemyImages[this._name]));
+			this._image.scaleX = this.info.enemySize / 50;
+			this._image.scaleY = this.info.enemySize / 50;
+			// Set a central reg x point
+			this._image.regX = this._image.getBounds().width/2;
+			this._image.regY = this._image.getBounds().height/2;
+			this._container.addChild(this._image);
+		}
+		else
+		{	
+			this._image = new createjs.Shape();
+			this._image.graphics.beginFill(info.color ? info.color : "magenta").dp(0, 0, this.info.enemySize ? this.info.enemySize : 20, this.info.numberOfSides ? this.info.numberOfSides : 6);
+		}
+		
+		this._container.addChild(this._image);
+
 
         if(!this.info.enemySize)
         {
@@ -74,8 +91,6 @@ class Enemy {
         {
             console.log("WARNING: Enemy '" + name + "' does not have a numberOfSides defined, using default ");
         }
-
-        
 
         // Set the attributes of the container
         this._container.x = this._position.x;

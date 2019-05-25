@@ -1,5 +1,5 @@
 class Bullet {
-    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null)
+    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null, bulletImage = null)
     {
         // create and parent the image
         this._container = new createjs.Container();
