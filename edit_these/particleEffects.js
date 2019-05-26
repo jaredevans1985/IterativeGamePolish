@@ -1,19 +1,11 @@
 // Steps for using particle effects
 // -----------------------------------
-// 1) 	You MUST have an array in an app object that will hold references to your emitters
-//		See the getNewEmitter and clearAllParticles functions below for an example.
-//		By default, they look for an app.particleEmitters array
-// 2)	In your main update call, you must loop through this array and update the emitters.
-//		For example:
-//		for (var i = 0; i < app.particleEmitters.length; i++)
-//		{
-//			app.particleEmitters[i].update(dt);            
-//		}
-// 3)	In getNewEmitter, make sure that your default parent, emitterArray, and assetList are all correct.
-// 4)	Look at the example functions below, both the commented out reference and the usable function
+// 1)	Look at the example functions below, both the commented out reference and the usable function
 //		Find one you like or make your own.
 //		Then, whenever you want to create an effect, simply call the function that builds it.
 //		For example, effects.basicBurst({ x: 100, y: 100}); would make a burst effect at 100, 100
+// 2)	Double check that your function name is listed as a string.
+//		You will reference this string in the polishsettings.js file
 
 // This effects object contains functions to build all of our effects as needed
 var particleEffects = {
@@ -27,7 +19,7 @@ var particleEffects = {
 	// To use it, simply call the function from anywhere,
 	// and a new emitter will be added to the app particle system.
 	//
-	//exampleEmitter: function(position)	// You can add more arguments. Position can be an object reference for tracking
+	//"exampleEmitter": function(position)	// You can add more arguments. Position can be an object reference for tracking
 	//{
 	//	// Get a new emitter
 	//	var newEmitter = this.getNewEmitter();

@@ -29,10 +29,23 @@ class Pickup {
 
         // create and parent the image
         this._container = new createjs.Container();
-        this._image = new createjs.Shape();
-        this._image.graphics.beginFill(info.color ? info.color : "magenta").dc(0, 0, this.info.imageSize ? this.info.imageSize : 20);
         parent.addChild(this._container);
-        this._container.addChild(this._image);
+        
+		if(polishSettings.pickupImages && polishSettings.pickupImages[this._name])
+		{
+			this._image = new createjs.Bitmap(assets.getResult(polishSettings.pickupImages[this._name]));
+			this._image.scaleX = this.info.imageSize / 13;
+			this._image.scaleY = this.info.imageSize / 13;
+			this._image.regX = this._image.getBounds().width/2;
+			this._image.regY = this._image.getBounds().height/2;
+		}
+		else
+		{
+			this._image = new createjs.Shape();
+			this._image.graphics.beginFill(info.color ? info.color : "magenta").dc(0, 0, this.info.imageSize ? this.info.imageSize : 20);	
+		}
+		
+		this._container.addChild(this._image);
 
         if(!info.color)
         {

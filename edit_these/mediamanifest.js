@@ -45,4 +45,8 @@ var mediaManifest = [
         src: "edit_these/media/images/enemybullet.png",
 		id: "enemybullet"
 	},
+	{
+        src: "edit_these/media/images/pickup.png",
+		id: "pickup"
+	},
 ]

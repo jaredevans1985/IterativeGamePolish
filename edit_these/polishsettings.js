@@ -32,6 +32,7 @@ var polishSettings = {
 	lossMessage: "YOU HAVE DIED",
 	
 	// Audio settings
+	// The sound name must correspond to an id listed in the mediamanifest
 	playerSounds: {
 		shoot: 'click',	// When the player shoots
 		hurt: 'click',	// When the player is hurt
@@ -84,6 +85,10 @@ var polishSettings = {
 	victoryMusic: "music",	// music that plays if you win (all waves completed)
 	lossMusic: "music",	// music that plays if you lose
 	
+	
+	// Particle settings
+	// All particle ids must correspond to a function name in particleEffects.js
+	
 	// Player Particle settings
 	// If you don't want one of these enabled, comment out the line
 	// imageID is only required for image particle effects
@@ -129,6 +134,7 @@ var polishSettings = {
 	},
 	
 	// Image Settings
+	// For images, the text must correspond to the ID listed in the mediamanifest
 	
 	// An image to appear on various screens
 	// Should be 800 x 600
@@ -166,5 +172,8 @@ var polishSettings = {
 	},
 	
 	// Pickup images
+	pickupImages: {
+		"coin1": "pickup",
+	},
 	
 }
