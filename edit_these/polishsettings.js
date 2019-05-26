@@ -78,7 +78,7 @@ var polishSettings = {
 	waveMusic: [
 		{
 			waveNumber: 1,
-			musicID: "music",
+			musicID: "click",
 		},
 	],
 	

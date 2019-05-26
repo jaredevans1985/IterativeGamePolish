@@ -69,7 +69,7 @@ var audio = {
 			if(polishSettings.victoryMusic)
 			{
 				// Stop music if currently playing
-				if(this.musicID != "")
+				if(this.musicID !== "")
 				{
 					createjs.Sound.stop(this.musicID);
 				}
@@ -84,7 +84,7 @@ var audio = {
 			if(polishSettings.lossMusic)
 			{
 				// Stop music if currently playing
-				if(this.musicID != "")
+				if(this.musicID !== "")
 				{
 					createjs.Sound.stop(this.musicID);
 				}

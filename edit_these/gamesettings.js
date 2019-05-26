@@ -15,7 +15,7 @@ var gameSettings = {
             spawnRate: 1,           // How long it takes, in seconds, before the next enemy appears
             spawnRateRandomizer: 3, // How much time, in seconds, might be added or substracted from the next spawn time, keep this shorter than your spawnrate
             enemyList: [            // What enemies will spawn this wave. Enemies will spawn in this order.
-                "healthpackEnemyThatShoots",
+                //"healthpackEnemyThatShoots",
 				"basicEnemy", 
             ],
         },
@@ -25,10 +25,10 @@ var gameSettings = {
             spawnRateRandomizer: 2, 
             enemyList: [            
                 "basicEnemy",
-                "healthpackEnemyThatShoots",
-                "healthpackEnemyThatShoots",
-                "basicEnemy",
-                "bossEnemy",
+               // "healthpackEnemyThatShoots",
+               // "healthpackEnemyThatShoots",
+              //  "basicEnemy",
+              //  "bossEnemy",
             ]
         }
     ],
