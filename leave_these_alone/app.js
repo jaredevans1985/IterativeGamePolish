@@ -556,6 +556,7 @@ var app = {
         app.clearGameObjects();
         app.waveReset();
         app.enemiesKilledThisGame = 0;
+		effects.clearAllParticles();
         
         // Reset player stats
         if(app.player)

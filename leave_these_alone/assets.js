@@ -85,7 +85,10 @@ var assets = {
         app.gotoScreen("menus");
 
         // Start the music
-        //audio.toggleMusic(true);
+		if(polishSettings.menuMusic)
+		{
+			audio.startMenuMusic();
+		}
     },
 
     // When an individual file is loaded, call this function

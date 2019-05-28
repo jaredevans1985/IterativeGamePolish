@@ -6,11 +6,13 @@ var polishSettings = {
 	// The name of the font you want to use
 	// Must be from the google fonts api
 	// Fonts can found here: https://fonts.google.com/ 
+	// NOTE: You must have a font
 	font: "Titan One",
 	fontColor: '#362868',	// hex, html and rgba colors should work here
 	
 	// Set up some default color values
 	// Used by things like buttons and other UI elements
+	// NOTE: You must have these colors defined
     colors : {
         default : '#957bf2',	// normal button color
         dark : '#362868',	// fillbarBackground, button pressed color
@@ -74,17 +76,20 @@ var polishSettings = {
 		},
 	},
 	
+	// Music that starts playing on the main menu
+	menuMusic: "music",
+	
 	// Different music that can start at each wave specified
 	waveMusic: [
 		{
 			waveNumber: 1,
-			musicID: "click",
+			musicID: "music",
 		},
 	],
 	
+	// Music that beings playing when the game ends
 	victoryMusic: "music",	// music that plays if you win (all waves completed)
 	lossMusic: "music",	// music that plays if you lose
-	
 	
 	// Particle settings
 	// All particle ids must correspond to a function name in particleEffects.js

@@ -123,5 +123,13 @@ var audio = {
         }
         
     },
+	
+	// Start the menu music
+	startMenuMusic : function()
+	{
+		this.musicID = polishSettings.menuMusic;
+		createjs.Sound.play(this.musicID, {loop:-1});
+		this.musicPlaying = true;
+	},
 
 };
