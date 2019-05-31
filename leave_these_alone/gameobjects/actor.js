@@ -143,7 +143,7 @@ class Actor {
 
         if(this.health > this.maxHealth)
         {
-            this.health = playerSettings.startingHealth;
+            this.health = this.maxHealth;
         }
 
         if(this.health < 0)
