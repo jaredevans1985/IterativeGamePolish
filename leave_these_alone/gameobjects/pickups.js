@@ -23,8 +23,8 @@ class Pickup {
 		this._ambientParticles = null;
 		if(this.pickupHasParticles())
 		{
-			effects.tryParticle(polishSettings.pickupParticles[this._name], "spawnParticle", this._position);
-			this._ambientParticles = effects.tryParticle(polishSettings.pickupParticles[this._name], "ambientParticle", this._position);
+			effects.tryParticle(polishSettings.pickupParticles[this._name], "spawnParticle", this);
+			this._ambientParticles = effects.tryParticle(polishSettings.pickupParticles[this._name], "ambientParticle", this);
 		}
 
         // create and parent the image
@@ -232,7 +232,7 @@ class Pickup {
 			// Try to do pickup particles
 			if(this.pickupHasParticles())
 			{
-				effects.tryParticle(polishSettings.pickupParticles[this._name], "pickupParticle", this._position);
+				effects.tryParticle(polishSettings.pickupParticles[this._name], "pickupParticle", this);
 			}
 		}
     }

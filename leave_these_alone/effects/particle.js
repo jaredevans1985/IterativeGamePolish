@@ -210,7 +210,7 @@ function Emitter () {
 		rotationMatrix.rotate(this.emitterRotation);
 		rotationMatrix.transformPoint(offset.x, offset.y, offset);
 		p.position = { x: this.position.x + offset.x, y: this.position.y + offset.y };
-		
+
 		p.emitterRotation = this.emitterRotation;
 		p.rotation = this.emitterRotation + rand(this.rotation.min, this.rotation.max);
 		p.rotationRate = rand(this.rotationRate.min, this.rotationRate.max);

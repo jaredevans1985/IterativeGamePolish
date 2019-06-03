@@ -212,6 +212,15 @@ var app = {
 						bulletParticle = { definition: polishSettings, ID: "playerBulletHitParticle" };
 					}
 					
+					var trailParticle = null;
+					
+					// Test for trail particle for bullet
+					if(polishSettings.playerBulletTrailParticle)
+					{
+						trailParticle = { definition: polishSettings, ID: "playerBulletTrailParticle" };
+					}
+					
+					
 					var bulletImageID = null;
 					var rotationRate = 0;
 					
@@ -221,7 +230,7 @@ var app = {
 						rotationRate = polishSettings.bulletImages.player.rotationRate;
 					}
 					
-					app.bullets.push(new Bullet(app.gamespace, "bullet" + app.bullets.length, xPos, yPos, app.player.rotation, playerSettings.bulletSize, bulletParticle, bulletImageID, rotationRate));
+					app.bullets.push(new Bullet(app.gamespace, "bullet" + app.bullets.length, xPos, yPos, app.player.rotation, playerSettings.bulletSize, bulletParticle, bulletImageID, rotationRate, trailParticle));
 					
 					app.fireRateTimer = 2;
 
@@ -238,7 +247,7 @@ var app = {
 					audio.playSound(polishSettings.playerSounds.shoot);
 				
 					// Make a particle
-					effects.tryParticle(polishSettings, "playerShootParticle", { x: xPos, y: yPos});
+					effects.tryParticle(polishSettings, "playerShootParticle", app.player);
 					
 				}
 

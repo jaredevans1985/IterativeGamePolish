@@ -103,7 +103,7 @@ var polishSettings = {
 	playerDeathParticle: { particleID: "basicImageBurst", imageID: "particle" }, // particle effect for when the player dies
 	playerHurtParticle: {particleID: "basicBurst"},	// effect when player is hit by something
 	playerBulletHitParticle: { particleID: "basicImageBurst", imageID: "particle" },	// effect when player's bullet hits something
-	playerBulletTrailParticle: { particleID: "basicStream", relativeToObject: true }, // Trail left by the player's bullet
+	playerBulletTrailParticle: { particleID: "basicStreamForPlayerBullet", relativeToObject: true }, // Trail left by the player's bullet
 	
 	// Enemy Particle Settings
 	enemyParticles: {
@@ -122,7 +122,7 @@ var polishSettings = {
 			deathParticle: { particleID: "basicBurst" },
 			shootParticle: { particleID: "basicBurst" },	// An effect when the enemy shoots
 			bulletHitParticle: {particleID: "basicBurst"},	// The effect when an enemy bullet hits something
-			//bulletTrailParticle: { particleID: "basicStream", relativeToObject: true }, // Trail left by enemy bullet
+			bulletTrailParticle: { particleID: "basicStream", relativeToObject: true }, // Trail left by enemy bullet
 		},
 	},
 	

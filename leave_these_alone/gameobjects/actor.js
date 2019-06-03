@@ -207,7 +207,7 @@ class Actor {
 			audio.playSound(polishSettings.playerSounds.die);
 			// do a particle
 			effects.clearAllParticles();
-			effects.tryParticle(polishSettings, "playerDeathParticle", this._position);
+			effects.tryParticle(polishSettings, "playerDeathParticle", this);
 			// start some music
 			audio.startFinalMusic(false);
         }
@@ -217,7 +217,7 @@ class Actor {
 			audio.playSound(polishSettings.playerSounds.hurt);
 			
 			//do a particle
-			effects.tryParticle(polishSettings, "playerHurtParticle", this._position);
+			effects.tryParticle(polishSettings, "playerHurtParticle", this);
 		}
     }
 

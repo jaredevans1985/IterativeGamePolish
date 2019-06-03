@@ -1,5 +1,5 @@
 class Bullet {
-    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null, bulletImageID = null, rotationRate = 0)
+    constructor(parent, name = "bullet", x = 0, y = 0, rotation = 0, scale = 1, deathParticleInfo = null, bulletImageID = null, rotationRate = 0, trailParticleInfo = null)
     {
         // create and parent the image
         this._container = new createjs.Container();
@@ -67,6 +67,13 @@ class Bullet {
             this.debugShape.graphics.beginStroke("black").drawCircle(0,0, this._radius/this.container.scale);
             this._container.addChild(this.debugShape);
         }
+		
+		// Try to create trail particles
+		this._trail = null;
+		if(trailParticleInfo)
+		{
+			this._trail = effects.tryParticle(trailParticleInfo.definition, trailParticleInfo.ID, this);
+		}
 		
 		// If there's a death particle, set it
 		if(deathParticleInfo)
@@ -158,7 +165,14 @@ class Bullet {
 		// If there's a death particle, fire it off
 		if(this._deathParticleInfo)
 		{
-			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this._position);
+			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this);
+		}
+		
+		// Remove trail if one exists
+		if(this._trail)
+		{
+			this._trail.kill();
+			this._trail = null;
 		}
 		
         this.killBullet();
@@ -167,7 +181,7 @@ class Bullet {
 }
 
 class EnemyBullet {
-    constructor(parent, name = "eBullet", x = 0, y = 0, rotation = 0, bulletInfo, deathParticleInfo = null, bulletImageID = null, rotationRate = 0)
+    constructor(parent, name = "eBullet", x = 0, y = 0, rotation = 0, bulletInfo, deathParticleInfo = null, bulletImageID = null, rotationRate = 0, trailParticleInfo = null)
     {
         // create and parent the image
         this._container = new createjs.Container();
@@ -230,6 +244,13 @@ class EnemyBullet {
             this.debugShape.graphics.beginStroke("black").drawCircle(0,0, this._radius);
             this._container.addChild(this.debugShape);
         }
+		
+		// Try to create trail particles
+		this._trail = null;
+		if(trailParticleInfo)
+		{
+			this._trail = effects.tryParticle(trailParticleInfo.definition, trailParticleInfo.ID, this);
+		}
 		
 		// If there's a death particle, set it
 		if(deathParticleInfo)
@@ -320,7 +341,14 @@ class EnemyBullet {
     {
 		if(this._deathParticleInfo)
 		{
-			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this._position);
+			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this);
+		}
+		
+		// Remove trail if one exists
+		if(this._trail)
+		{
+			this._trail.kill();
+			this._trail = null;
 		}
 		
         this.killBullet();

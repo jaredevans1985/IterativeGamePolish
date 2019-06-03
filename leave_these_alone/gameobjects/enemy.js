@@ -275,6 +275,14 @@ class Enemy {
 						bulletParticle = { definition: polishSettings.enemyParticles[this._name], ID: "bulletHitParticle" };
 					}
 					
+					var trailParticle = null;
+					
+					// Test for trail particle for bullet
+					if(polishSettings.enemyParticles[this._name])
+					{
+						trailParticle = { definition: polishSettings.enemyParticles[this._name], ID: "bulletTrailParticle" };
+					}
+					
 					var bulletImageID = null;
 					var rotationRate = 0;
 					
@@ -284,7 +292,7 @@ class Enemy {
 						rotationRate = polishSettings.bulletImages[this._name].rotationRate;
 					}
 
-                    app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings, bulletParticle, bulletImageID, rotationRate));
+                    app.enemyBullets.push(new EnemyBullet(app.gamespace, "ebullet" + app.enemyBullets.length, this._position.x, this._position.y, this._rotation, this.info.bulletSettings, bulletParticle, bulletImageID, rotationRate, trailParticle));
 					
 					// Play shoot sound if one exists
 					if(polishSettings.enemySounds[this.name] && polishSettings.enemySounds[this.name].shoot)
@@ -295,7 +303,7 @@ class Enemy {
 					// And try a particle
 					if(this.enemyHasParticles())
 					{
-						effects.tryParticle(polishSettings.enemyParticles[this._name], "shootParticle", this._position);
+						effects.tryParticle(polishSettings.enemyParticles[this._name], "shootParticle", this);
 					}
                 }
             }
@@ -339,7 +347,7 @@ class Enemy {
 			// Create death particle
 			if(this.enemyHasParticles())
 			{
-				effects.tryParticle(polishSettings.enemyParticles[this._name], "deathParticle", this._position);
+				effects.tryParticle(polishSettings.enemyParticles[this._name], "deathParticle", this);
 			}
 
             app.enemiesKilledThisWave++;
@@ -420,7 +428,7 @@ class Enemy {
 			// And try a particle
 			if(this.enemyHasParticles())
 			{
-				effects.tryParticle(polishSettings.enemyParticles[this._name], "hurtParticle", this._position);
+				effects.tryParticle(polishSettings.enemyParticles[this._name], "hurtParticle", this);
 			}
 		}
     }

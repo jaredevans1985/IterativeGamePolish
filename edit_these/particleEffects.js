@@ -112,6 +112,41 @@ var particleEffects = {
 		return newEmitter;
 	},
 
+	// This is a basic emitter that constantly creates particles at a given rate
+	"basicStreamForPlayerBullet": function(position, relativeObject = null)
+	{
+		// Get a new emitter
+		var newEmitter = effects.getNewEmitter();
+
+		// Define the settings for this emitter
+		newEmitter.lifetime = { min: 1, max: 2 };
+        newEmitter.position = position;
+        newEmitter.positionOffsetX = { min: 0, max: 0 };
+        newEmitter.positionOffsetY = { min: 0, max: 0 };
+        newEmitter.velocityY = { min: 0, max: 0 };
+        newEmitter.velocityX = { min: -100, max: -100 };
+        newEmitter.size = { min: 10, max: 15 };
+		newEmitter.rate = 10;
+
+		// If an object has been provided, be relative to it
+		if(relativeObject)
+		{
+			newEmitter.relativeTo = relativeObject;
+		}
+		
+        newEmitter.startColor = {
+            min: new RGBA(230,50,0,255),
+            max: new RGBA(255,230,0,255)
+        };
+        
+        newEmitter.endColor = {
+            min: new RGBA(255,255,255,0),
+            max: new RGBA(255,255,255,0)
+		};
+		
+		return newEmitter;
+	},
+
 	// A basic burst that creates a given number of particles all at once and dies when those particles do
 	"basicBurst" : function(position)
 	{
@@ -165,7 +200,7 @@ var particleEffects = {
         newEmitter.positionOffsetX = { min: -3, max: 3 };
         newEmitter.positionOffsetY = { min: -3, max: 3 };
         newEmitter.velocityY = { min: 0, max: 0 };
-        newEmitter.velocityX = { min: 100, max: 100 };
+        newEmitter.velocityX = { min: -100, max: -100 };
         newEmitter.radius = { min: 30, max: 45 };
 		newEmitter.rate = 10;
 		newEmitter.rotation = { min: 0, max: 360 };
