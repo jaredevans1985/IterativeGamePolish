@@ -99,10 +99,11 @@ var polishSettings = {
 	// imageID is only required for image particle effects
 	// if no imageID is specified, you won't get an error, but if you're using an effect that requires an image, you won't see anything
 	playerShootParticle: { particleID: "basicBurst" },	// Effect when player fires
-	playerTrailParticle: { particleID: "basicImageStream", imageID: "particle"},	// A trail of particles that follows the player (use a stream)
+	playerTrailParticle: { particleID: "basicImageStream", imageID: "particle", relativeToObject: true},	// A trail of particles that follows the player (use a stream)
 	playerDeathParticle: { particleID: "basicImageBurst", imageID: "particle" }, // particle effect for when the player dies
 	playerHurtParticle: {particleID: "basicBurst"},	// effect when player is hit by something
 	playerBulletHitParticle: { particleID: "basicImageBurst", imageID: "particle" },	// effect when player's bullet hits something
+	playerBulletTrailParticle: { particleID: "basicStream", relativeToObject: true }, // Trail left by the player's bullet
 	
 	// Enemy Particle Settings
 	enemyParticles: {
@@ -114,13 +115,14 @@ var polishSettings = {
 		"basicEnemy": {
 			hurtParticle: { particleID: "basicBurst" },	// When the enemy is hit
 			deathParticle: { particleID: "basicImageBurst", imageID: "particle" },	// When the enemy dies
-			trailParticle: { particleID: "basicStream" },	// An ambient trail that follows the enemy
+			trailParticle: { particleID: "basicStream", relativeToObject: true },	// An ambient trail that follows the enemy
 		},
 		"healthpackEnemyThatShoots": {
 			hurtParticle: { particleID: "basicImageBurst", imageID: "particle" },
 			deathParticle: { particleID: "basicBurst" },
 			shootParticle: { particleID: "basicBurst" },	// An effect when the enemy shoots
 			bulletHitParticle: {particleID: "basicBurst"},	// The effect when an enemy bullet hits something
+			//bulletTrailParticle: { particleID: "basicStream", relativeToObject: true }, // Trail left by enemy bullet
 		},
 	},
 	

@@ -6,7 +6,7 @@ class Actor {
         this._rotation = rotation;
 		
 		// Create the player trail
-		effects.tryParticle(polishSettings, "playerTrailParticle", this._position);
+		effects.tryParticle(polishSettings, "playerTrailParticle", this);
 		
         // create and parent the image
         this._container = new createjs.Container();

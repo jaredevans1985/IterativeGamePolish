@@ -18,7 +18,7 @@
 // This effects object contains functions to build all of our effects as needed
 var effects = {
 	// Try to execute a particle effect
-	tryParticle: function(effectInfo, effectName, position)
+	tryParticle: function(effectInfo, effectName, object)
 	{
 		
 		// Test to see if the effect is defined
@@ -27,14 +27,21 @@ var effects = {
 			// Does the particle method exist
 			if(particleEffects[effectInfo[effectName].particleID])
 			{
+				// Does this effect need to be relative to anything?
+				var relativeObject = null;
+				if(effectInfo[effectName].relativeToObject)
+				{
+					relativeObject = object;
+				}
+				
 				// Is there an image id or not
 				if(effectInfo[effectName].imageID)
 				{
-					return particleEffects[effectInfo[effectName].particleID](position, effectInfo[effectName].imageID);
+					return particleEffects[effectInfo[effectName].particleID](object.position, effectInfo[effectName].imageID, relativeObject);
 				}
 				else
 				{
-					return particleEffects[effectInfo[effectName].particleID](position);
+					return particleEffects[effectInfo[effectName].particleID](object.position, relativeObject);
 				}
 			}
 			else

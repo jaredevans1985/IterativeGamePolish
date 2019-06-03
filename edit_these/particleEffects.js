@@ -78,7 +78,7 @@ var particleEffects = {
 	*/
 
 	// This is a basic emitter that constantly creates particles at a given rate
-	"basicStream": function(position)
+	"basicStream": function(position, relativeObject = null)
 	{
 		// Get a new emitter
 		var newEmitter = effects.getNewEmitter();
@@ -86,13 +86,19 @@ var particleEffects = {
 		// Define the settings for this emitter
 		newEmitter.lifetime = { min: 1, max: 2 };
         newEmitter.position = position;
-        newEmitter.positionOffsetX = { min: -3, max: 3 };
-        newEmitter.positionOffsetY = { min: -3, max: 3 };
-        newEmitter.velocityY = { min: -100, max: 100 };
-        newEmitter.velocityX = { min: -100, max: 100 };
+        newEmitter.positionOffsetX = { min: 0, max: 0 };
+        newEmitter.positionOffsetY = { min: 0, max: 0 };
+        newEmitter.velocityY = { min: 0, max: 0 };
+        newEmitter.velocityX = { min: 100, max: 100 };
         newEmitter.size = { min: 10, max: 15 };
 		newEmitter.rate = 10;
 
+		// If an object has been provided, be relative to it
+		if(relativeObject)
+		{
+			newEmitter.relativeTo = relativeObject;
+		}
+		
         newEmitter.startColor = {
             min: new RGBA(230,50,0,255),
             max: new RGBA(255,230,0,255)
@@ -128,7 +134,7 @@ var particleEffects = {
 		newEmitter.rotation = { min: 0, max: 360 };
 		newEmitter.rotationRate = { min: 90, max: 180 };
 		newEmitter.endScale = 0.75;
-
+		
         newEmitter.startColor = {
             min: new RGBA(0,50,230,255),
             max: new RGBA(0,230,255,255)
@@ -143,7 +149,7 @@ var particleEffects = {
 	},
 
 	// A basic image particle stream that uses a preloaded bitmap image instead of a shape
-	"basicImageStream": function(position, imageID)
+	"basicImageStream": function(position, imageID, relativeObject = null)
 	{
 		// Get a new emitter
 		var newEmitter = effects.getNewEmitter();
@@ -158,14 +164,20 @@ var particleEffects = {
         newEmitter.position = position;
         newEmitter.positionOffsetX = { min: -3, max: 3 };
         newEmitter.positionOffsetY = { min: -3, max: 3 };
-        newEmitter.velocityY = { min: -50, max: 50 };
-        newEmitter.velocityX = { min: -50, max: 50 };
+        newEmitter.velocityY = { min: 0, max: 0 };
+        newEmitter.velocityX = { min: 100, max: 100 };
         newEmitter.radius = { min: 30, max: 45 };
 		newEmitter.rate = 10;
 		newEmitter.rotation = { min: 0, max: 360 };
 		newEmitter.rotationRate = { min: 90, max: 180 };
 		newEmitter.startScale = 0.6;
 
+		// If an object has been provided, be relative to it
+		if(relativeObject)
+		{
+			newEmitter.relativeTo = relativeObject;
+		}
+		
 		// Note: even though we don't need a color, the alpha value is used to fade the image
 		newEmitter.startColor = {
             min: new RGBA(255,255,255,0.5),

@@ -50,7 +50,7 @@ class Enemy {
 		this._trail = null;
 		if(this.enemyHasParticles())
 		{
-			this._trail = effects.tryParticle(polishSettings.enemyParticles[this._name], "trailParticle", this._position);
+			this._trail = effects.tryParticle(polishSettings.enemyParticles[this._name], "trailParticle", this);
 		}
 
         // create and parent the image
