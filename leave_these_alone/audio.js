@@ -50,6 +50,7 @@ var audio = {
 			if(polishSettings.waveMusic[i].waveNumber == waveNum)
 			{
 				this.musicID = polishSettings.waveMusic[i].musicID;
+				
 			}
 		}
 		

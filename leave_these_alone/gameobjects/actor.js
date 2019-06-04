@@ -211,14 +211,17 @@ class Actor {
 			// start some music
 			audio.startFinalMusic(false);
         }
-		else
+		else if(!(collidingObject instanceof Pickup))	// If we're here, we're getting hurt
 		{
 			// Make a noise
 			audio.playSound(polishSettings.playerSounds.hurt);
-			
+
 			//do a particle
 			effects.tryParticle(polishSettings, "playerHurtParticle", this);
 		}
+		// else // otherwise this is a pickup
+		//{
+		//}
     }
 
 }

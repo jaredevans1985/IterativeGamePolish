@@ -469,7 +469,6 @@ var app = {
             this.screen.removeAllChildren();
             this.resetGame(); 
             this.screen = new GameScreen();
-			audio.startWaveMusic(this.currentWave);
             this.state = "wavestart";
             this.createPlayer();
             this.screen.healthFill.updateFillbar();
@@ -690,6 +689,9 @@ var app = {
 				}
 			}
 		}
+		
+		// Start wave music
+		audio.startWaveMusic(this.currentWave);
     }
 
 }

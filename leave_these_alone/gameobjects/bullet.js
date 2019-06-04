@@ -156,6 +156,13 @@ class Bullet {
 
     killBullet()
     {
+		// Remove trail if one exists
+		if(this._trail)
+		{
+			this._trail.kill();
+			this._trail = null;
+		}
+		
         app.gamespace.removeChild(this._container);
         app.bullets.splice(app.bullets.indexOf(this), 1);
     }
@@ -166,13 +173,6 @@ class Bullet {
 		if(this._deathParticleInfo)
 		{
 			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this);
-		}
-		
-		// Remove trail if one exists
-		if(this._trail)
-		{
-			this._trail.kill();
-			this._trail = null;
 		}
 		
         this.killBullet();
@@ -333,6 +333,13 @@ class EnemyBullet {
 
     killBullet()
     {
+		// Remove trail if one exists
+		if(this._trail)
+		{
+			this._trail.kill();
+			this._trail = null;
+		}
+		
         app.gamespace.removeChild(this._container);
         app.enemyBullets.splice(app.enemyBullets.indexOf(this), 1);
     }
@@ -342,13 +349,6 @@ class EnemyBullet {
 		if(this._deathParticleInfo)
 		{
 			effects.tryParticle(this._deathParticleInfo.definition, this._deathParticleInfo.ID, this);
-		}
-		
-		// Remove trail if one exists
-		if(this._trail)
-		{
-			this._trail.kill();
-			this._trail = null;
 		}
 		
         this.killBullet();
