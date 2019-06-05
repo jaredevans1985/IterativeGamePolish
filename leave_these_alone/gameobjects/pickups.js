@@ -206,7 +206,7 @@ class Pickup {
         // Any special draw code we need
     }
     
-    killPickup()
+    killPickup(silent = false)
     {
         app.gamespace.removeChild(this._container);
         app.pickups.splice(app.pickups.indexOf(this), 1);
@@ -223,16 +223,19 @@ class Pickup {
 		}
 		else
 		{
-			// Play pickup sound if one exists
-			if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].pickup)
+			if(!silent)
 			{
-				audio.playSound(polishSettings.pickupSounds[this.name].pickup);
-			}
-			
-			// Try to do pickup particles
-			if(this.pickupHasParticles())
-			{
-				effects.tryParticle(polishSettings.pickupParticles[this._name], "pickupParticle", this);
+				// Play pickup sound if one exists
+				if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].pickup)
+				{
+					audio.playSound(polishSettings.pickupSounds[this.name].pickup);
+				}
+				
+				// Try to do pickup particles
+				if(this.pickupHasParticles())
+				{
+					effects.tryParticle(polishSettings.pickupParticles[this._name], "pickupParticle", this);
+				}
 			}
 		}
     }

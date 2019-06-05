@@ -465,8 +465,8 @@ var app = {
             break;
 
             case "wavestart":
-            effects.clearAllParticles();
             this.screen.removeAllChildren();
+			effects.clearAllParticles();
             this.resetGame(); 
             this.screen = new GameScreen();
             this.state = "wavestart";
@@ -600,7 +600,7 @@ var app = {
         {
             app.player.position = {x: app.SCREEN_WIDTH / 2, y: app.SCREEN_HEIGHT /2}
 			app.player.container.visible = true;
-			effects.tryParticle(polishSettings, "playerTrailParticle", app.player.position);
+			effects.tryParticle(polishSettings, "playerTrailParticle", app.player);
         }
     },
 
@@ -645,7 +645,7 @@ var app = {
         {        
             for(i = app.pickups.length -1 ; i >= 0; i--)
             {
-                app.pickups[i].killPickup();
+                app.pickups[i].killPickup(true);
             }
         }
 

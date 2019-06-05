@@ -38,27 +38,35 @@ var audio = {
 	// Start Wave Music
 	startWaveMusic : function(waveNum)
 	{
-		// Stop music if currently playing
-		if(this.musicID != "")
-		{
-			createjs.Sound.stop(this.musicID);
-		}
+		
+		var tempMusicID = "";
 		
 		// Find and set new music id
 		for(var i = 0; i < polishSettings.waveMusic.length; i++)
 		{
 			if(polishSettings.waveMusic[i].waveNumber == waveNum)
 			{
-				this.musicID = polishSettings.waveMusic[i].musicID;
-				
+				tempMusicID = polishSettings.waveMusic[i].musicID;
 			}
 		}
 		
-		// Start new music
-		if(this.musicID != "")
+		if(tempMusicID != "")
 		{
-			createjs.Sound.play(this.musicID, {loop:-1});
-			this.musicPlaying = true;
+		
+			// Stop music if currently playing
+			if(this.musicID != "")
+			{
+				createjs.Sound.stop(this.musicID);
+			}
+			
+			this.musicID = tempMusicID;
+
+			// Start new music
+			if(this.musicID != "")
+			{
+				createjs.Sound.play(this.musicID, {loop:-1});
+				this.musicPlaying = true;
+			}
 		}
 	},
 	
