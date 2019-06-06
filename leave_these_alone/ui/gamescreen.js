@@ -11,7 +11,7 @@ class GameScreen extends ScreenBase
         this.scoreUI = ui.makeText(this, app.score, app.SCREEN_WIDTH - 15, 25, ui.defaultFont.font, ui.defaultFont.color, "right");
      
         // Displays text in between waves
-        this.waveText = ui.makeText(this, "", 400, 200, "50px " + polishSettings.font, "rgba(0, 0, 0, 255)", "center");
+        this.waveText = ui.makeText(this, "", 400, 200, "50px " + polishSettings.font, ui.defaultFont.color, "center");
         this.waveText.alpha = 0;
         this.updateWaveText();
 

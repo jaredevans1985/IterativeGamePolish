@@ -128,11 +128,11 @@ class LoadingScreen extends createjs.Container
 		
 		// Create a background shape
 		this.fillShape = new createjs.Shape();
-        this.fillShape.graphics.beginFill('#fff291').drawRect(0, 0, 800, 600);
+        this.fillShape.graphics.beginFill(polishSettings.colors.background).drawRect(0, 0, 800, 600);
         this.addChild(this.fillShape);
 		
         //Create a text object
-		var newText = new createjs.Text("LOADING", "40px " + polishSettings.font, '#362868');
+		var newText = new createjs.Text("LOADING", "40px " + polishSettings.font, polishSettings.fontColor);
         newText.x = app.SCREEN_WIDTH /2; //positions the text
         newText.y = app.SCREEN_HEIGHT /2 - 50;
         newText.textAlign = "center";
@@ -141,15 +141,15 @@ class LoadingScreen extends createjs.Container
 
         // Add a fillbar
         var fillbarBack = new createjs.Shape();
-        fillbarBack.graphics.beginFill('#362868').drawRect(app.SCREEN_WIDTH /2 - 105, app.SCREEN_HEIGHT /2 + 20, 210, 50);
+        fillbarBack.graphics.beginFill(polishSettings.colors.dark).drawRect(app.SCREEN_WIDTH /2 - 105, app.SCREEN_HEIGHT /2 + 20, 210, 50);
         this.addChild(fillbarBack);
 
         this.fillbar = new createjs.Shape();
-        this.fillbar.graphics.beginFill('#dad1f9').drawRect(app.SCREEN_WIDTH /2 - 100, app.SCREEN_HEIGHT /2 + 25, 0, 40);
+        this.fillbar.graphics.beginFill(polishSettings.colors.progressFill).drawRect(app.SCREEN_WIDTH /2 - 100, app.SCREEN_HEIGHT /2 + 25, 0, 40);
         this.addChild(this.fillbar);
 
         // Add Percentage Text
-		this.percentText = new createjs.Text("0%", "26px " + polishSettings.font, '#362868');
+		this.percentText = new createjs.Text("0%", "26px " + polishSettings.font, polishSettings.colors.fillbarText);
         this.percentText.x = app.SCREEN_WIDTH / 2 + 5; //positions the text
         this.percentText.y = app.SCREEN_HEIGHT / 2 + 45;
         this.percentText.textAlign = "center";
@@ -159,7 +159,7 @@ class LoadingScreen extends createjs.Container
 
      updateFillbar(percent)
      {
-        this.fillbar.graphics.beginFill('#dad1f9').drawRect(app.SCREEN_WIDTH /2 - 100, app.SCREEN_HEIGHT /2 + 25, 200 * percent, 40);
+        this.fillbar.graphics.beginFill(polishSettings.colors.progressFill).drawRect(app.SCREEN_WIDTH /2 - 100, app.SCREEN_HEIGHT /2 + 25, 200 * percent, 40);
         var nicePercent = (assets.loadPercentage * 100) | 0;
         this.percentText.text = nicePercent + "%";
     }
