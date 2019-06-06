@@ -212,7 +212,7 @@ class Pickup {
         app.pickups.splice(app.pickups.indexOf(this), 1);
 		
 		
-		if(this.timeLeft <= 0)
+		if(this.timeLeft <= 0 && this.timeLeft != -1)
 		{
 			// Play timeout sound if one exists
 			if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].timeout)
@@ -228,6 +228,7 @@ class Pickup {
 				// Play pickup sound if one exists
 				if(polishSettings.pickupSounds[this.name] && polishSettings.pickupSounds[this.name].pickup)
 				{
+					console.log("playing sound");
 					audio.playSound(polishSettings.pickupSounds[this.name].pickup);
 				}
 				
